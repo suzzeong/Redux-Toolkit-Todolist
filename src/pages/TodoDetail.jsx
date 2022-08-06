@@ -1,11 +1,11 @@
 import React from "react";
-import Detail from "../components/Detail";
+import List from "../components/List"
 import Layout from "../components/Layout";
 
 const TodoDetail = () => {
   return (
     <Layout>
-      <Detail />
+      <List />
     </Layout>
   );
 };
