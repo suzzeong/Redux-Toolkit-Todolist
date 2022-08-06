@@ -1,12 +1,13 @@
 import React from "react";
-import Home from "../components/Home";
 import Layout from "../components/Layout";
+import List from "../components/List";
 
 const TodoList = () => {
-  return (
-    <Layout>
-      <Home />
-    </Layout>
-  );
-};
+    return(
+        <Layout>
+            <List/>
+        </Layout>
+    )
+}
+
 export default TodoList;

@@ -21,7 +21,7 @@ const Home = () => {
           </HomeGotoPageDiv>
           <HomeGotoPageDiv
             onClick={() => {
-              navigate("/detail");
+              navigate("/todolist");
             }}
           >
             <HomeGotoPageText>TODO LIST</HomeGotoPageText>

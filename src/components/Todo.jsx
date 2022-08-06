@@ -2,13 +2,19 @@ import React from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 const Todo = () => {
   // const { todo } = useSelector((state) => state.todos);
   // const dispatch = useDispatch;
 
+  const navigate = useNavigate()
   return (
-    <StTodoContainer>
+    <StTodoContainer
+    onClick={() => {
+      navigate(`/detail`);     
+      // `/detail/${todo.id}` 요렇게 수정해야 한다.
+    }}>
       <StTodo>
         <StTodoTitle>확인용 제목</StTodoTitle>
         <StTodoUsername>작성자: 미상</StTodoUsername>

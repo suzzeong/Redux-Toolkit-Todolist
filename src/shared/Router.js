@@ -1,18 +1,21 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TodoList from "../pages/TodoList"
+import TodoHome from "../pages/TodoHome"
 import TodoDetail from "../pages/TodoDetail"
 import TodoForm from "../pages/TodoForm"
 import Comment from "../components/Comment"
+import TodoList from "../pages/TodoList";
 
 const Router = () => {
     return(
         <BrowserRouter>
             <Routes>
-                <Route path ="/" element={<TodoList/>}/>
+                <Route path ="/" element={<TodoHome/>}/>
                 {/* <Route path ="/detail/:id" element={<TodoDetail/>}/> */}
                 <Route path ="/detail" element={<TodoDetail/>}/>
                 <Route path ="/form" element={<TodoForm/>}/>
+                <Route path ="/todolist" element={<TodoList/>}/>
+
                 <Route path ="/comment" element={<Comment/>}/>
             </Routes>
         </BrowserRouter>

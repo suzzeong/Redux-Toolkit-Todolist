@@ -25,7 +25,11 @@ const Detail = () => {
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
                 </DetailBottom>
             </DetailContainer>
-            <DetailComment>눌러서 댓글보기</DetailComment>
+            <DetailComment
+            onClick={() => {
+                navigate("/Comment");
+              }}
+            >눌러서 댓글보기</DetailComment>
         </DetailTotal>
 
 
