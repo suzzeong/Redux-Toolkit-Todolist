@@ -1,11 +1,14 @@
 import React from "react";
-import Detail from "../components/Detail";
+import Layout from '../components/Layout';
+// import Detail from '../components/Detail';
+import List from "../components/List"
 
 const TodoDetail = () => {
-    return(
-        // 전체페이지+헤더랑 연결 필요
-        <Detail/>
-    )
-}
+  return (
+    <Layout>
+        <List/>
+    </Layout>
+  )
+};
 
 export default TodoDetail;
