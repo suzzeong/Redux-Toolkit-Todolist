@@ -1,13 +1,12 @@
 import React from "react";
+import Home from "../components/Home";
 import Layout from "../components/Layout";
-import Detail from "../components/Detail";
 
-const TodoDetail = () => {
+const TodoHome = () => {
   return (
     <Layout>
-      <Detail/>
+      <Home />
     </Layout>
   );
 };
-
-export default TodoDetail;
+export default TodoHome;

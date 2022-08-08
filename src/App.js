@@ -1,8 +1,10 @@
-// import Router from './shared/Router';
+import React from 'react';
+import Router from './shared/Router';
 
 function App() {
-  // return <Router />;
-  return <div>안녕</div>
+
+  return <Router />;
+
 }
 
 export default App;
