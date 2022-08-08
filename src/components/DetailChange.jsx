@@ -1,17 +1,20 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { __getTodos } from "../redux/modules/todosSlice";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
+// import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Detail = () => {
+const DetailChange = ({id}) => {
 
-    const navigate = useNavigate();
+    const[inputValue, setInputValue] = useState("");
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { isLoading, error, todos } = useSelector((state) => state.todos);
 
     useEffect(() => {
-        dispatch(__getTodos())
+        dispatch(__putTodos())
     }, [dispatch])
 
     if (isLoading) {
@@ -21,53 +24,56 @@ const Detail = () => {
         return <div>{error.message}</div>
     }
 
+    const onUpdate = (e) => {
+        e.preventDefault();
+        console.log(id)
+        if(inputValue){
+            dispatch(__putTodos(id));
+            setInputValue("")
+        }
+    }
+
     return (
+
         <DetailTotal>
             <DetailContainer>
                 <DetailTop>
-                    <TodoId>ID : ({todos.map((todo) => <div key={todo.id}>{todo.id}</div>)})</TodoId>
-                    <StP
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >이전으로</StP>
-                </DetailTop>
-                <Title>
                     <div>
                         {todos.map((todo) => (
                             <div key={todo.id}>{todo.title}</div>
                         ))}
                     </div>
-                </Title>
+                </DetailTop>
+                <StTextArea >
+                    <div>
+                        {todos.map((todo) => (
+                            <textarea 
+                            key={todo.id}
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            rows="10"
+                            maxLength="200"
+                            style = {{border : "1px solid rgb(238,238,238)", padding : "12px", fontSize:"14px", width:"100%"}}
+                            >{todo.content}</textarea>
+                        ))}
+                    </div>
+                </StTextArea>
                 <DetailBottom>
-                    <Content>
-                        <div>
-                            {todos.map((todo) => (
-                                <div key={todo.id}>{todo.content}</div>
-                            ))}
-                        </div>
-                    </Content>
-                    <button
-                    onClick={() => {
-                        navigate("/detailchange")
-                    }}
-                    >{todos.isDone === true ? "저장" : "수정"}</button>
+                    <button onClick={() => {
+                        navigate(-1)
+                    }}>저장</button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
-
                 </DetailBottom>
             </DetailContainer>
             <DetailComment
                 onClick={() => {
-                    navigate("/Comment");
+
                 }}
             >눌러서 댓글보기</DetailComment>
         </DetailTotal>
-
-
     )
 }
-
-export default Detail;
+export default DetailChange;
 
 const DetailTotal = styled.div``
 
@@ -77,30 +83,17 @@ const DetailContainer = styled.div`
     padding: 24px;
 `
 
-const DetailTop = styled.div`
+const DetailTop = styled.h1`
 display: flex;
 justify-content: space-between;
 align-items:center;
 flex-direction: row;
 margin-bottom: 32px;
 `
-const TodoId = styled.div`
-font-size: 24px;
-display: flex;
-`
-const StP = styled.div`
-font-size: 24px;
-text-decoration: underline;
-color: teal;
-`
-const Title = styled.div`
-font-size: 32px;
-font-weight: 700;
-`
-const Content = styled.div`
-font-size: 18px;
-`
 
+const StTextArea = styled.div`
+
+`
 const DetailBottom = styled.div`
 display: flex;
 align-items: center;

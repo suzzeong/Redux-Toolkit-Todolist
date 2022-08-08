@@ -5,6 +5,7 @@ import TodoDetail from "../pages/TodoDetail"
 import TodoForm from "../pages/TodoForm"
 import Comment from "../components/Comment"
 import TodoList from "../pages/TodoList";
+import TodoDetailChange from "../pages/TodoDetailChange";
 
 const Router = () => {
     return(
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path ="/todolist" element={<TodoList/>}/>
 
                 <Route path ="/comment" element={<Comment/>}/>
+                <Route path ="/detailchange" element={<TodoDetailChange/>}/>
             </Routes>
         </BrowserRouter>
     )
