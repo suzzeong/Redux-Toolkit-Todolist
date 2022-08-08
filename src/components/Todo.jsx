@@ -1,26 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { __deleteTodos } from '../redux/modules/todosSlice';
+import { __deleteTodos, __getTodos } from '../redux/modules/todosSlice';
 
-const Todo = ({ todo, id }) => {
+const Todo = ({ todo }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(__deleteTodos());
-  }, [dispatch]);
-
-  console.log(todo)
+  // console.log(todo)
+  
   const onClickDeleteButtonHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (window.confirm('삭제하시겠습니까?')) dispatch(__deleteTodos(id));
-    console.log(id)
+    if (window.confirm('삭제하시겠습니까?')) dispatch(__deleteTodos(todo.id));
+    dispatch(__getTodos());
     // useState로 todos를 변경시켜서 리렌더링 vs 서버에서 다시 fetch하는 것
-    // window.location.reload();
+    // console.log(todo.id);
   };
 
   return (

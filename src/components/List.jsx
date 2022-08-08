@@ -28,7 +28,7 @@ const List = () => {
       <StTitle>내 할일</StTitle>
       <StContainer>
         <StList>
-          {todos?.map((todo) => <Todo key={todo.id} id={todo.id} todo={todo}/>)}
+          {todos.map((todo) => <Todo key={todo.id} id={todo.id} todo={todo}/>)}
         </StList>
       </StContainer>
     </StTodos>
