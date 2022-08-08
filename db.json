@@ -1,11 +1,13 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "리액트",
-      "content": "get 구현하기",
-      "username": "작성자이름"
-    },
+      "username": "청운이",
+      "title": "안녕2",
+      "content": "메롱2",
+      "id": 2
+    }
+  ],
+  "comments": [
     {
       "id": 2,
       "title": "리액트2",

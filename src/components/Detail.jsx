@@ -1,34 +1,65 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { __getTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
-
 
 const Detail = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isLoading, error, todos } = useSelector((state) => state.todos);
+
+    useEffect(() => {
+        dispatch(__getTodos())
+    }, [dispatch])
+
+    if (isLoading) {
+        return <div>로딩중</div>
+    }
+    if (error) {
+        return <div>{error.message}</div>
+    }
 
     return (
         <DetailTotal>
             <DetailContainer>
                 <DetailTop>
-                    <TodoId>id : ({ })</TodoId>
+                    <TodoId>ID : ({todos.map((todo) => <div key={todo.id}>{todo.id}</div>)})</TodoId>
                     <StP
                         onClick={() => {
                             navigate(-1);
                         }}
                     >이전으로</StP>
                 </DetailTop>
-                <Title>제목 들어갈 자리</Title>
+                <Title>
+                    <div>
+                        {todos.map((todo) => (
+                            <div key={todo.id}>{todo.title}</div>
+                        ))}
+                    </div>
+                </Title>
                 <DetailBottom>
-                    <Content>내용 들어갈 자리</Content>
-                    <button>수정</button>
+                    <Content>
+                        <div>
+                            {todos.map((todo) => (
+                                <div key={todo.id}>{todo.content}</div>
+                            ))}
+                        </div>
+                    </Content>
+                    <button
+                    onClick={() => {
+                        navigate("/detailchange")
+                    }}
+                    >{todos.isDone === true ? "저장" : "수정"}</button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
+
                 </DetailBottom>
             </DetailContainer>
             <DetailComment
-            onClick={() => {
-                navigate("/Comment");
-              }}
+                onClick={() => {
+                    navigate("/Comment");
+                }}
             >눌러서 댓글보기</DetailComment>
         </DetailTotal>
 
@@ -55,6 +86,7 @@ margin-bottom: 32px;
 `
 const TodoId = styled.div`
 font-size: 24px;
+display: flex;
 `
 const StP = styled.div`
 font-size: 24px;

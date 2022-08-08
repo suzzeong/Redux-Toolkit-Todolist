@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { __deleteTodos, __getTodos } from '../redux/modules/todosSlice';
+import { __deleteTodos, __getTodos } from "../redux/modules/todosSlice"
 
 const Todo = ({ todo }) => {
   const dispatch = useDispatch();
@@ -57,7 +57,6 @@ const StTodo = styled.div`
   justify-content: space-between;
   flex-direction: row;
 `;
-
 const StTodoTitle = styled.div`
   font-size: 20px;
 `;
