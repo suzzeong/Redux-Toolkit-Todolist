@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
+// import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -13,9 +13,9 @@ const DetailChange = ({id}) => {
     const navigate = useNavigate();
     const { isLoading, error, todos } = useSelector((state) => state.todos);
 
-    useEffect(() => {
-        dispatch(__putTodos())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(__putTodos())
+    // }, [dispatch])
 
     if (isLoading) {
         return <div>로딩중</div>
@@ -24,14 +24,14 @@ const DetailChange = ({id}) => {
         return <div>{error.message}</div>
     }
 
-    const onUpdate = (e) => {
-        e.preventDefault();
-        console.log(id)
-        if(inputValue){
-            dispatch(__putTodos(id));
-            setInputValue("")
-        }
-    }
+    // const onUpdate = (e) => {
+    //     e.preventDefault();
+    //     console.log(id)
+    //     if(inputValue){
+    //         dispatch(__putTodos(id));
+    //         setInputValue("")
+    //     }
+    // }
 
     return (
 
