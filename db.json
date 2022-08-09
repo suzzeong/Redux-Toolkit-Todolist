@@ -9,9 +9,10 @@
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "title": "리액트2",
+      "content": "delete 구현하기",
+      "username": "작성자이름2"
     }
   ]
 }

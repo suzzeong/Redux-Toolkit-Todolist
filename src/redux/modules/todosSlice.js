@@ -53,8 +53,8 @@ export const todosSlice = createSlice({
     },
     [__deleteTodos.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action);
-      //   state.filter((todo) => todo.id !== action.payload);
+      // console.log(action);
+      state.todos.filter((todo) => todo.id !== action.payload);
     },
     [__deleteTodos.rejected]: (state, action) => {
       state.isLoading = false;

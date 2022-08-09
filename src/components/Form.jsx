@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { __getTodos, __postTodos } from "../redux/modules/todosSlice";
+import Input from './elements/Input';
+import Textarea from './elements/Textarea';
+import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [todo, setTodo] = useState({
-    username: "",
-    title: "",
-    content: "",
+    username: '',
+    title: '',
+    content: '',
   });
 
   useEffect(() => {
@@ -30,31 +34,48 @@ const Form = () => {
     dispatch(__postTodos(todo));
     dispatch(__getTodos());
     setTodo({
-      username: "",
-      title: "",
-      content: "",
+      username: '',
+      title: '',
+      content: '',
     });
+    navigate(`/todolist`);
   };
 
-  return(
+  return (
     <FormFirstdWrap onSubmit={onSubmitHandler}>
       <FormSecondWrap>
         <FormAddTodoWrap>
-          <FormTextDiv>
+          {/* <FormTextDiv>
             <FormTextFontDiv>작성자</FormTextFontDiv>
-          </FormTextDiv>
+          </FormTextDiv> */}
           {/* elements/Input 넣을 자리 */}
-          <input type="text" name="username" value={username} onChange={onChangeHandler} placeholder="작성자의 이름을 입력해주세요. (5자 이내)" />
-          <FormTextDiv>
-            <FormTextFontDiv>제목</FormTextFontDiv>
-          </FormTextDiv>
+          <Input
+            fontsize='24px'
+            label='작성자'
+            type='text'
+            name='username'
+            value={username}
+            onChange={onChangeHandler}
+            placeholder='작성자의 이름을 입력해주세요. (5자 이내)'
+          />
           {/* elements/Input 넣을 자리 */}
-          <input type="text" name="title" value={title} onChange={onChangeHandler} placeholder="제목을 입력해주세요. (50자 이내)" />
-          <FormTextDiv>
-            <FormTextFontDiv>내용</FormTextFontDiv>
-          </FormTextDiv>
+          <Input
+            fontsize='24px'
+            label='제목'
+            type='text'
+            name='title'
+            value={title}
+            onChange={onChangeHandler}
+            placeholder='제목을 입력해주세요. (50자 이내)'
+          />
           {/* elements/Textarea 넣을 자리 */}
-          <textarea name="content" value={content} onChange={onChangeHandler} placeholder="내용을 입력해주세요. (200자 이내)" />
+          <Textarea
+            label='내용'
+            name='content'
+            value={content}
+            onChange={onChangeHandler}
+            placeholder='내용을 입력해주세요. (200자 이내)'
+          />
         </FormAddTodoWrap>
         {/* elements/Button 넣을 자리, 임시로 CSS 넣어두었습니다.*/}
         <button>추가하기</button>
@@ -81,11 +102,4 @@ const FormAddTodoWrap = styled.div`
   margin: 0px;
   text-decoration: none;
   outline: none;
-`;
-const FormTextDiv = styled.div`
-  width: 100%;
-  margin: 10px 0px;
-`;
-const FormTextFontDiv = styled.div`
-  font-size: 24px;
 `;
