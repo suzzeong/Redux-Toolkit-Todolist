@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __getTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
+// import Comment from './Comment';
 
 const Detail = () => {
 
@@ -56,11 +57,8 @@ const Detail = () => {
 
                 </DetailBottom>
             </DetailContainer>
-            <DetailComment
-                onClick={() => {
-                    navigate("/Comment");
-                }}
-            >눌러서 댓글보기</DetailComment>
+            {/* <button onClick={() => { navigate(`/comment`) }}>임시 페이지 이동</button> */}
+            {/* <Comment userId={todos[0].id}/> */}
         </DetailTotal>
 
 
@@ -108,14 +106,4 @@ justify-content: space-between;
 flex-direction: column;
 margin-top: 50px;
 min-height: 550px;
-`
-
-const DetailComment = styled.div`
-display: flex;
-align-items:center;
-justify-content: space-between;
-flex-direction: row;
-height: 50px;
-padding: 0px 12px;
-border-top: 1px solid rgb(238,238,238);
 `
