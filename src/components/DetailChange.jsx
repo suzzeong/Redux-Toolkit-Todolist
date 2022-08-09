@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-// import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
+import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const DetailChange = ({id}) => {
+const DetailChange = () => {
 
-    const[inputValue, setInputValue] = useState("");
+    const { isLoading, error, todos } = useSelector((state) => state.todos);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isLoading, error, todos } = useSelector((state) => state.todos);
+    // const [content, setContent] = useState("")
 
-    // useEffect(() => {
-    //     dispatch(__putTodos())
-    // }, [dispatch])
+    const [updateContent, setUpdateContent] = useState(todos.content)
+
+    useEffect(() => {
+        dispatch(__getTodos());
+    }, [dispatch]);
+
+    const handleContent = (e) => {
+        // document.getElementById("content")
+        //     .addEventListener("input", (event) => alert("change!"))
+        setUpdateContent(e.target.value)
+    }
+    
+    const onSubmitHandler = () => {
+        const _inputData = {
+            updateContent : updateContent
+        }
+        dispatch(__putTodos(_inputData))
+        setUpdateContent("")
+    };
 
     if (isLoading) {
         return <div>로딩중</div>
@@ -24,18 +40,9 @@ const DetailChange = ({id}) => {
         return <div>{error.message}</div>
     }
 
-    // const onUpdate = (e) => {
-    //     e.preventDefault();
-    //     console.log(id)
-    //     if(inputValue){
-    //         dispatch(__putTodos(id));
-    //         setInputValue("")
-    //     }
-    // }
-
     return (
 
-        <DetailTotal>
+        <DetailTotal onSubmit={onSubmitHandler}>
             <DetailContainer>
                 <DetailTop>
                     <div>
@@ -47,21 +54,22 @@ const DetailChange = ({id}) => {
                 <StTextArea >
                     <div>
                         {todos.map((todo) => (
-                            <textarea 
-                            key={todo.id}
-                            value={inputValue}
-                            onChange={(e) => setInputValue(e.target.value)}
-                            rows="10"
-                            maxLength="200"
-                            style = {{border : "1px solid rgb(238,238,238)", padding : "12px", fontSize:"14px", width:"100%"}}
+                            <textarea
+                                key={todo.id}
+                                className="content"
+                                onChange={handleContent}
+                                rows="10"
+                                maxLength="200"
+                                style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
                             >{todo.content}</textarea>
                         ))}
                     </div>
                 </StTextArea>
                 <DetailBottom>
-                    <button onClick={() => {
-                        navigate(-1)
-                    }}>저장</button>
+                    <button
+                    onClick={() => {
+                        navigate(-1)}}
+                    >저장</button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
                 </DetailBottom>
             </DetailContainer>

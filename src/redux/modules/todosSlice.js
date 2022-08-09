@@ -31,6 +31,16 @@ export const __postTodos = createAsyncThunk("todos/postTodos", async (payload, t
   } catch (error) {}
 });
 
+// putTodos 테스트하는 중
+
+export const __putTodos = createAsyncThunk("todos/putTodos", async(payload,thunkAPI) => {
+  try {
+    await axios.delete(`http://localhost:3001/todos/${payload}`);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
@@ -53,8 +63,8 @@ export const todosSlice = createSlice({
     },
     [__deleteTodos.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action);
-      //   state.filter((todo) => todo.id !== action.payload);
+      // console.log(action);
+      state.todos.filter((todo) => todo.id !== action.payload);
     },
     [__deleteTodos.rejected]: (state, action) => {
       state.isLoading = false;
@@ -68,6 +78,17 @@ export const todosSlice = createSlice({
       state.todos.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
     },
     [__postTodos.rejected]: (state, action) => {
+      state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
+      state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+    },
+    [__putTodos.pending]: (state) => {
+      state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
+    },
+    [__putTodos.fulfilled]: (state, action) => {
+      state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
+      state.todos.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+    },
+    [__putTodos.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },

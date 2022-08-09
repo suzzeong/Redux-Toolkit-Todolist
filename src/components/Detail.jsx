@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { __getTodos } from "../redux/modules/todosSlice";
+import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
 
 const Detail = () => {
@@ -13,6 +13,7 @@ const Detail = () => {
     useEffect(() => {
         dispatch(__getTodos())
     }, [dispatch])
+
 
     if (isLoading) {
         return <div>로딩중</div>
@@ -49,8 +50,7 @@ const Detail = () => {
                     </Content>
                     <button
                     onClick={() => {
-                        navigate("/detailchange")
-                    }}
+                        navigate("/detailchange")}}
                     >{todos.isDone === true ? "저장" : "수정"}</button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
 
