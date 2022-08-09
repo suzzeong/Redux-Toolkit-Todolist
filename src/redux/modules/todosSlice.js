@@ -34,8 +34,7 @@ export const __postTodos = createAsyncThunk("todos/postTodos", async (payload, t
 
 export const __putTodos = createAsyncThunk("todos/putTodos", async (payload, thunkAPI) => {
   try {
-    const data = await axios.get('http://localhost:3001/comments');
-    console.log(data.data);
+    const data = await axios.put("http://localhost:3001/todos", payload);
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
