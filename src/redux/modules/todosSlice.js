@@ -5,6 +5,7 @@ const initialState = {
   todos: [],
   isLoading: false,
   error: null,
+  comments:[],
 };
 
 export const __getTodos = createAsyncThunk("todos/getTodos", async (payload, thunkAPI) => {
@@ -31,11 +32,20 @@ export const __postTodos = createAsyncThunk("todos/postTodos", async (payload, t
   } catch (error) {}
 });
 
-// putTodos 테스트하는 중
+export const __postComment = createAsyncThunk('todos/postComment', async(payload, thunkAPI)=>{ 
+  try{
+    await axios.post('http://localhost:3001/comments',payload);
+    return thunkAPI.fulfillWithValue(payload);
+  }catch(error){
+    return thunkAPI.rejectWithValue("ERROR=>",error);
+  }
+});
 
-export const __putTodos = createAsyncThunk("todos/putTodos", async(payload,thunkAPI) => {
+export const __getComments = createAsyncThunk("todos/getComments", async (payload, thunkAPI) => {
   try {
-    await axios.delete(`http://localhost:3001/todos/${payload}`);
+    const data = await axios.get('http://localhost:3001/comments');
+    console.log(data.data);
+    return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -63,8 +73,8 @@ export const todosSlice = createSlice({
     },
     [__deleteTodos.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action);
-      state.todos.filter((todo) => todo.id !== action.payload);
+      console.log(action);
+      // state.todos.filter((todo) => todo.id !== action.payload);
     },
     [__deleteTodos.rejected]: (state, action) => {
       state.isLoading = false;
@@ -81,16 +91,27 @@ export const todosSlice = createSlice({
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
-    [__putTodos.pending]: (state) => {
+    [__postComment.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
     },
-    [__putTodos.fulfilled]: (state, action) => {
+    [__postComment.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      state.todos.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+      state.comments.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
     },
-    [__putTodos.rejected]: (state, action) => {
+    [__postComment.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+    },
+    [__getComments.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.comments = action.payload;
+    },
+    [__getComments.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
 });
