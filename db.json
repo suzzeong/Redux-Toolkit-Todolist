@@ -9,10 +9,10 @@
   ],
   "comments": [
     {
-      "userId": 3,
-      "userName": "제발",
-      "userContent": "되주세요",
-      "id": 1
+      "id": 2,
+      "title": "리액트2",
+      "content": "delete 구현하기",
+      "username": "작성자이름2"
     }
   ]
 }
