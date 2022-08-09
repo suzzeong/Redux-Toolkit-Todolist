@@ -14,10 +14,10 @@ const Comment = ({userId}) => {
     const  { comments }  = useSelector((state) => state.todos);
     console.log("comments=>",comments);
 
-    useEffect(() => {
-        dispatch(__getComments());
-        console.log("ABCDEFGHIJKLMN");
-        }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(__getComments());
+    //     console.log("ABCDEFGHIJKLMN");
+    //     }, [dispatch])
 
     // comments.map((v)=>{console.log("MAP=>",v)})
 
