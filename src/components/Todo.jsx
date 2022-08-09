@@ -10,14 +10,24 @@ const Todo = ({ todo }) => {
   const navigate = useNavigate();
 
   const onClickDeleteButtonHandler = (e) => {
+<<<<<<< HEAD
     //e.preventDefault();
     e.stopPropagation();
     if (window.confirm('삭제하시겠습니까?')) dispatch(__deleteTodos(todo.id));
     dispatch(__getTodos());
     
+=======
+    // e.preventDefault();
+    e.stopPropagation();
+    if (window.confirm('삭제하시겠습니까?')) dispatch(__deleteTodos(todo.id));
+    dispatch(__getTodos());
+
+>>>>>>> 94e6e01c360df90c2dc5d33c7ed0d8f0ef5211fd
     // useState로 todos를 변경시켜서 리렌더링 vs 서버에서 다시 fetch하는 것
     // console.log(todo.id);
   };
+
+  //console.log(todo)
 
   return (
     <StTodoContainer
@@ -35,7 +45,7 @@ const Todo = ({ todo }) => {
       <StTodoUsername>작성자: {todo.username}</StTodoUsername>
     </StTodoContainer>
   );
-};
+};;
 
 export default Todo;
 

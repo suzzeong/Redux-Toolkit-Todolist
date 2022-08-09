@@ -4,6 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
+<<<<<<< HEAD
+=======
+
+### Hexo ###
+db.json
+>>>>>>> 94e6e01c360df90c2dc5d33c7ed0d8f0ef5211fd
 
 # testing
 /coverage
