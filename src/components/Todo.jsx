@@ -1,24 +1,26 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate } from 'react-router-dom';
-import { __deleteTodos, __getTodos } from "../redux/modules/todosSlice"
+import React from "react";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useNavigate } from "react-router-dom";
+import { __deleteTodos, __getTodos } from "../redux/modules/todosSlice";
+import Button from "./elements/Button";
 
 const Todo = ({ todo }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // console.log(todo)
-  
   const onClickDeleteButtonHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     e.stopPropagation();
-    if (window.confirm('삭제하시겠습니까?')) dispatch(__deleteTodos(todo.id));
+    if (window.confirm("삭제하시겠습니까?")) dispatch(__deleteTodos(todo.id));
     dispatch(__getTodos());
+
     // useState로 todos를 변경시켜서 리렌더링 vs 서버에서 다시 fetch하는 것
     // console.log(todo.id);
   };
+
+  //console.log(todo)
 
   return (
     <StTodoContainer
@@ -29,9 +31,12 @@ const Todo = ({ todo }) => {
     >
       <StTodo>
         <StTodoTitle>{todo.title}</StTodoTitle>
-        <StTodobutton type='button' onClick={onClickDeleteButtonHandler}>
+        {/* <StTodobutton type='button' onClick={onClickDeleteButtonHandler}>
           <DeleteIcon />
-        </StTodobutton>
+        </StTodobutton> */}
+        <Button bordercolor="rgb(221,221,221)" bgcolor="white" width="30px" height="30px" onClick={onClickDeleteButtonHandler}>
+          <DeleteIcon />
+        </Button>
       </StTodo>
       <StTodoUsername>작성자: {todo.username}</StTodoUsername>
     </StTodoContainer>
@@ -60,17 +65,7 @@ const StTodo = styled.div`
 const StTodoTitle = styled.div`
   font-size: 20px;
 `;
-const StTodobutton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 8px;
-  border: 1px solid rgb(238, 238, 238);
-  background-color: rgb(255, 255, 255);
-  width: 30px;
-  height: 30px;
-`;
+
 const StTodoUsername = styled.div`
   font-size: 10px;
   width: 100%;

@@ -3,35 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __getTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
-// import Comment from './Comment';
+import Button from "./elements/Button";
+import Comment from './Comment';
 
 const Detail = () => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isLoading, error, todos } = useSelector((state) => state.todos);
 
     useEffect(() => {
-        dispatch(__getTodos())
-    }, [dispatch])
+        dispatch(__getTodos());
+    }, [dispatch]);
 
     if (isLoading) {
-        return <div>로딩중</div>
+        return <div>로딩중</div>;
     }
     if (error) {
-        return <div>{error.message}</div>
+        return <div>{error.message}</div>;
     }
 
     return (
         <DetailTotal>
             <DetailContainer>
                 <DetailTop>
-                    <TodoId>ID : ({todos.map((todo) => <div key={todo.id}>{todo.id}</div>)})</TodoId>
+                    <TodoId>
+                        ID : (
+                        {todos.map((todo) => (
+                            <div key={todo.id}>{todo.id}</div>
+                        ))}
+                        )
+                    </TodoId>
                     <StP
                         onClick={() => {
                             navigate(-1);
                         }}
-                    >이전으로</StP>
+                    >
+                        이전으로
+                    </StP>
                 </DetailTop>
                 <Title>
                     <div>
@@ -48,17 +56,23 @@ const Detail = () => {
                             ))}
                         </div>
                     </Content>
-                    <button
-                    onClick={() => {
-                        navigate("/detailchange")
-                    }}
-                    >{todos.isDone === true ? "저장" : "수정"}</button>
+                    <Button
+                        type="submit"
+                        bordercolor="rgb(221,221,221)"
+                        bgcolor="white"
+                        width="100%"
+                        height="50px"
+                        onClick={() => {
+                            navigate("/detailchange");
+                        }}
+                    >
+                        {todos.isDone === true ? "저장" : "수정"}
+                    </Button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
-
                 </DetailBottom>
             </DetailContainer>
             {/* <button onClick={() => { navigate(`/comment`) }}>임시 페이지 이동</button> */}
-            {/* <Comment userId={todos[0].id}/> */}
+            <Comment userId={todos[0].id}/>
         </DetailTotal>
 
 

@@ -29,15 +29,24 @@ export const __postTodos = createAsyncThunk("todos/postTodos", async (payload, t
   try {
     await axios.post("http://localhost:3001/todos", payload);
     return thunkAPI.fulfillWithValue(payload);
-  } catch (error) {}
+  } catch (error) { }
 });
 
-export const __postComment = createAsyncThunk('todos/postComment', async(payload, thunkAPI)=>{ 
-  try{
-    await axios.post('http://localhost:3001/comments',payload);
+export const __putTodos = createAsyncThunk("todos/putTodos", async (payload, thunkAPI) => {
+  try {
+    const data = await axios.put("http://localhost:3001/todos", payload);
+    return thunkAPI.fulfillWithValue(data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+export const __postComment = createAsyncThunk('todos/postComment', async (payload, thunkAPI) => {
+  try {
+    await axios.post('http://localhost:3001/comments', payload);
     return thunkAPI.fulfillWithValue(payload);
-  }catch(error){
-    return thunkAPI.rejectWithValue("ERROR=>",error);
+  } catch (error) {
+    return thunkAPI.rejectWithValue("ERROR=>", error);
   }
 });
 
@@ -50,6 +59,7 @@ export const __getComments = createAsyncThunk("todos/getComments", async (payloa
     return thunkAPI.rejectWithValue(error);
   }
 });
+
 
 export const todosSlice = createSlice({
   name: "todos",
@@ -116,5 +126,5 @@ export const todosSlice = createSlice({
   },
 });
 
-export const {} = todosSlice.actions;
+export const { } = todosSlice.actions;
 export default todosSlice.reducer;

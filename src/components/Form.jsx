@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { __getTodos, __postTodos } from "../redux/modules/todosSlice";
+import Input from "./elements/Input";
+import Textarea from "./elements/Textarea";
+import { useNavigate } from "react-router-dom";
+import Button from "./elements/Button";
 
 const Form = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [todo, setTodo] = useState({
     username: "",
     title: "",
@@ -27,37 +32,58 @@ const Form = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    if (username == "") {
+      return alert("작성자 이름을 입력해주세요");
+    } else if (title === "") {
+      return alert("제목을 입력해주세요");
+    } else if (content == "") {
+      return alert("내용을 입력해주세요");
+    }
     dispatch(__postTodos(todo));
-    dispatch(__getTodos());
-    setTodo({
-      username: "",
-      title: "",
-      content: "",
-    });
+    navigate("/todolist");
   };
 
-  return(
+  return (
     <FormFirstdWrap onSubmit={onSubmitHandler}>
       <FormSecondWrap>
         <FormAddTodoWrap>
-          <FormTextDiv>
-            <FormTextFontDiv>작성자</FormTextFontDiv>
-          </FormTextDiv>
-          {/* elements/Input 넣을 자리 */}
-          <input type="text" name="username" value={username} onChange={onChangeHandler} placeholder="작성자의 이름을 입력해주세요. (5자 이내)" />
-          <FormTextDiv>
-            <FormTextFontDiv>제목</FormTextFontDiv>
-          </FormTextDiv>
-          {/* elements/Input 넣을 자리 */}
-          <input type="text" name="title" value={title} onChange={onChangeHandler} placeholder="제목을 입력해주세요. (50자 이내)" />
-          <FormTextDiv>
-            <FormTextFontDiv>내용</FormTextFontDiv>
-          </FormTextDiv>
-          {/* elements/Textarea 넣을 자리 */}
-          <textarea name="content" value={content} onChange={onChangeHandler} placeholder="내용을 입력해주세요. (200자 이내)" />
+          <Input
+            maxLength="10"
+            fontsize="24px"
+            label="작성자"
+            pattern=".{1,5}"
+            title="1자 이상 5자 이내를입력하세요"
+            type="text"
+            name="username"
+            value={username}
+            onChange={onChangeHandler}
+            placeholder="작성자의 이름을 입력해주세요. (5자 이내)"
+          />
+          <Input
+            maxLength="50"
+            fontsize="24px"
+            label="제목"
+            pattern=".{3,50}"
+            title="3자 이상 50자 이내를입력하세요"
+            type="text"
+            name="title"
+            value={title}
+            onChange={onChangeHandler}
+            placeholder="제목을 입력해주세요. (50자 이내)"
+          />
+          <Textarea
+            maxLength="200"
+            label="내용"
+            title="1자 이상 200자 이내를입력하세요"
+            name="content"
+            value={content}
+            onChange={onChangeHandler}
+            placeholder="내용을 입력해주세요. (200자 이내)"
+          />
         </FormAddTodoWrap>
-        {/* elements/Button 넣을 자리, 임시로 CSS 넣어두었습니다.*/}
-        <button>추가하기</button>
+        <Button type="submit" bordercolor="rgb(221,221,221)" bgcolor="white" width="100%" height="50px">
+          추가하기
+        </Button>
       </FormSecondWrap>
     </FormFirstdWrap>
   );
@@ -81,11 +107,4 @@ const FormAddTodoWrap = styled.div`
   margin: 0px;
   text-decoration: none;
   outline: none;
-`;
-const FormTextDiv = styled.div`
-  width: 100%;
-  margin: 10px 0px;
-`;
-const FormTextFontDiv = styled.div`
-  font-size: 24px;
 `;

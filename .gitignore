@@ -7,9 +7,6 @@
 /.pnp
 .pnp.js
 
-### Hexo ###
-db.json
-
 # testing
 /coverage
 

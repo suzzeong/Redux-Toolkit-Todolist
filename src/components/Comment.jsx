@@ -97,9 +97,11 @@ const CommentInputName = styled.input`
 const CommentInputContent = styled.input`
     width:1600px;
 `;
+
 const CommentFormButton = styled.button`
     margin:0 15px;
 `;
+
 
 const CommentBox = styled.div`
     width:100%;
