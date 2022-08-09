@@ -1,19 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Textarea = (props) => {
-  const { label, id, name, value, onChange, placeholder } = props;
+  const { maxLength, title, label, id, name, value, onChange, placeholder } = props;
   return (
     <TextareaWrap>
       <Stlabel>{label}</Stlabel>
-      <StTextarea
-        id={id}
-        type='text'
-        value={value}
-        name={name}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
+      <StTextarea maxLength={maxLength} title={title} id={id} type="text" value={value} name={name} onChange={onChange} placeholder={placeholder} />
     </TextareaWrap>
   );
 };

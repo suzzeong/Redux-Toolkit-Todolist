@@ -1,13 +1,16 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Input = (props) => {
-  const { fontsize, label, id, value, name, onChange, placeholder } = props;
+  const { maxLength, pattern, title, fontsize, label, id, value, name, onChange, placeholder } = props;
   return (
     <InputWrap>
       <Stlabel fontsize={fontsize}>{label}</Stlabel>
       <StInput
+        maxLength={maxLength}
+        pattern={pattern}
+        title={title}
         id={id}
-        type='text'
+        type="text"
         value={value}
         name={name}
         onChange={onChange}
