@@ -37,10 +37,10 @@ const DetailChange = () => {
         ...todo,
         id: param.id,
         content: updateContent,
-      }
-      ))
+      })
+    );
     // dispatch(__getTodos())
-    navigate(`/detail/${param.id}`)
+    navigate(`/detail/${param.id}`);
   };
 
   if (isLoading) {
@@ -86,7 +86,7 @@ const DetailChange = () => {
           </Button>
         </DetailBottom>
       </DetailContainer>
-      <DetailComment onClick={() => { }}>눌러서 댓글보기</DetailComment>
+      <DetailComment onClick={() => {}}>눌러서 댓글보기</DetailComment>
     </DetailTotal>
   );
 };
