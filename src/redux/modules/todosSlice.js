@@ -99,7 +99,7 @@ export const todosSlice = createSlice({
     [__deleteTodos.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log(action);
-      // state.todos.filter((todo) => todo.id !== action.payload);
+      state.todos.filter((todo) => todo.id !== action.payload);
     },
     [__deleteTodos.rejected]: (state, action) => {
       state.isLoading = false;

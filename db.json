@@ -1,21 +1,10 @@
 {
   "todos": [
     {
-<<<<<<< HEAD
-      "바껴라 얍": "",
-      "id": 4
-    },
-    {
-      "username": "ㅇ",
-      "title": "ㅇㅇㅇ",
-      "content": "ㅇㅇㅇ",
-      "id": 5
-=======
-      "username": "111",
-      "title": "222",
-      "content": "333",
-      "id": 1
->>>>>>> 4305d7d622014457368af567f7b3d4f9ca696850
+      "username": "확인해보자",
+      "title": "확인중",
+      "content": "확읺해해ㅐ",
+      "id": 2
     }
   ],
   "comments": [
