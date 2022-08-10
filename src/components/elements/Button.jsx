@@ -15,14 +15,11 @@ const Button = ({ btntype, type, onClick, children, uibutton }) => {
 export default Button;
 
 const StButton = styled.button`
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
   border-radius: 8px;
   cursor: pointer;
   ${(props) => {
     return (
-      props.btntype === "basic" &&
+      props.btntype === 'basic' &&
       css`
         border: 1px solid rgb(221, 221, 221);
         background-color: white;
@@ -33,7 +30,7 @@ const StButton = styled.button`
   }}
   ${(props) => {
     return (
-      props.btntype === "basic-small" &&
+      props.btntype === 'basic-small' &&
       css`
         border: 1px solid rgb(221, 221, 221);
         background-color: white;
@@ -44,7 +41,7 @@ const StButton = styled.button`
   }}
   ${(props) => {
     return (
-      props.btntype === "ui-comment" &&
+      props.btntype === 'ui-comment' &&
       css`
         border: 1px solid white;
         background-color: rgb(254, 83, 31);
@@ -56,9 +53,11 @@ const StButton = styled.button`
   }}
     ${(props) => {
     return (
-      props.btntype === "ui-list" &&
+      props.btntype === 'ui-list' &&
       css`
         display: flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid rgb(221, 221, 221);
         background-color: white;
         color: rgb(254, 83, 31);

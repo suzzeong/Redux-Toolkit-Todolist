@@ -52,11 +52,19 @@ const DetailChange = () => {
         </DetailTop>
         <StTextArea>
           <div>
-            <Textarea key={todo.id} value={updateContent} onChange={handleContent} rows="10" maxLength="200" width="100%" height="200px" />
+            <Textarea
+              // key={todo.id}
+              value={updateContent}
+              onChange={handleContent}
+              rows='10'
+              maxLength='200'
+              width='100%'
+              height='200px'
+            />
           </div>
         </StTextArea>
         <DetailBottom>
-          <Button type="submit" btntype="basic">
+          <Button type='submit' btntype='basic'>
             저장
           </Button>
         </DetailBottom>
