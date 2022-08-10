@@ -5,6 +5,7 @@ import styled from "styled-components";
 // import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "./elements/Button";
+import Textarea from "./elements/Textarea";
 
 const DetailChange = () => {
 
@@ -28,17 +29,18 @@ const DetailChange = () => {
     setUpdateContent(e.target.value);
   };
 
-  const onSubmitHandler = () => {
-    console.log(param.id)
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(param.id);
     dispatch(
       __putTodos({
         ...todo,
         id: param.id,
         content: updateContent,
-      }
-      ))
+      })
+    );
     // dispatch(__getTodos())
-    navigate(`/detail/${param.id}`)
+    navigate(`/detail/${param.id}`);
   };
 
   if (isLoading) {
@@ -50,7 +52,7 @@ const DetailChange = () => {
 
   return (
     <DetailTotal onSubmit={onSubmitHandler}>
-      <DetailContainer >
+      <DetailContainer>
         <DetailTop>
           <div>
             <div>{todo.title}</div>
@@ -58,23 +60,24 @@ const DetailChange = () => {
         </DetailTop>
         <StTextArea>
           <div>
-            <textarea
+            <Textarea
               key={todo.id}
               value={updateContent}
               onChange={handleContent}
-              rows="10"
-              maxLength="200"
-              style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
+              rows='10'
+              maxLength='200'
+              width='100%'
+              height='200px'
             />
           </div>
         </StTextArea>
         <DetailBottom>
           <Button
-            type="submit"
-            bordercolor="rgb(221,221,221)"
-            bgcolor="white"
-            width="100%"
-            height="50px"
+            type='submit'
+            bordercolor='rgb(221,221,221)'
+            bgcolor='white'
+            width='100%'
+            height='50px'
             onClick={() => {
               // navigate(`/detail/${param.id}`);
             }}
@@ -83,7 +86,7 @@ const DetailChange = () => {
           </Button>
         </DetailBottom>
       </DetailContainer>
-      <DetailComment onClick={() => { }}>눌러서 댓글보기</DetailComment>
+      <DetailComment onClick={() => {}}>눌러서 댓글보기</DetailComment>
     </DetailTotal>
   );
 };

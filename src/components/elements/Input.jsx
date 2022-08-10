@@ -41,12 +41,15 @@ const Stlabel = styled.label`
 `;
 
 const StInput = styled.input`
-  border: 1px solid #000;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  border: 1px solid rgb(238,238,238);
   margin-bottom: 40px;
-  width: 400px;
+  width: 100%;
   height: auto;
-  padding: 5px;
+  padding: 12px;
   border-radius: 5px;
+  font-size: 14px;
   :hover {
     border: 1px solid #457be1;
   }
