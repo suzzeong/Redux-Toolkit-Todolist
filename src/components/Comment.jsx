@@ -6,48 +6,47 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { red } from '@mui/material/colors';
 
 import { useDispatch,useSelector } from "react-redux";
-import { __postComment,__getComments } from "../redux/modules/todosSlice";
+import { __postComment,__getComments,__deleteComment } from "../redux/modules/todosSlice";
 
-const Comment = ({userId}) => {
+import { useParams } from "react-router-dom";
 
+const Comment = () => {
     const dispatch = useDispatch();
-    // const  comments  = useSelector((state) => state.todos);
-    const  { comments }  = useSelector((state) => state.todos);
+    // const  {comments}  = useSelector((state) => state.todos);
+    const  comments   = useSelector((state) => state.todos.comments);
     console.log("comments=>",comments);
 
-    const [comment, setComment] = useState({
-        userId:userId,
-    });
+    useEffect(() => {
+        dispatch(__getComments());
+        }, [dispatch])
 
-    // useEffect(() => {
-    //     dispatch(__getComments());
-    //     }, [dispatch])
+        const param = useParams();
+		// 훅을 사용해서 생성한 param을 콘솔에 찍어봅시다.
 
-    // comments.map((v)=>{console.log("MAP=>",v)})
-
-
-    const showComment = () => {
-
-    }
+        
+    const [comment, setComment] = useState({});
 
     const onChangeHandler = (e) => {
         const {value,name} = e.target;
         setComment({
-            ...comment,
+            usreId:param.id,
             [name]:value
         })
     }
-    
     const postComment = (e) => {
-        console.log(e);
-        console.log('comment->',comment);
+        e.preventDefault();
         dispatch(__postComment(comment));
+    }
+
+    const deleteBtn = (id) => {
+        console.log(id);
+        dispatch(__deleteComment(id));
     }
 
     return(
         <>
             <CommentWrap>
-                <p><span onClick={showComment}>눌러서 댓글보기</span></p>
+                {/* <p><span onClick={showComment}>눌러서 댓글보기</span></p> */}
                 <ShowHideBox>
                     <CommentForm onSubmit={postComment}>
                         <CommentInputName type="text" name = 'userName' onChange={onChangeHandler} placeholder="(이름 5자 이내)" />
@@ -55,18 +54,18 @@ const Comment = ({userId}) => {
                         <CommentFormButton>추가하기</CommentFormButton>
                     </CommentForm>
                     <div>
-                        {/* {comments.map((v)=>{ */}
-                            <CommentBox>
-                            <CommentContent>
-                                {/* <CommentTop>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!{v.userName}</CommentTop>
-                                <CommentBottom>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{v.userContent}</CommentBottom> */}
-                            </CommentContent>
-                            <CommentButton>
-                                <EditIcon className='button_margin' sx={{ backgroundColor: red[500], color:'white',margin:'10px' }}/>
-                                <DeleteIcon className='button_margin' sx={{ backgroundColor: red[500], color:'white',margin:'10px' }}/>
-                            </CommentButton>
-                        </CommentBox>
-                        {/* })} */}
+                        {comments.map((v)=>(
+                            <CommentBox key={v.id}>
+                                <CommentContent>
+                                    <CommentTop>{v.userName}</CommentTop>
+                                    <CommentBottom>{v.userContent}</CommentBottom>
+                                </CommentContent>
+                                <CommentButton>
+                                    <EditIcon className='button_margin' sx={{ backgroundColor: red[500], color:'white',margin:'10px' }}/>
+                                    <DeleteIcon onClick={()=>{/* deleteBtn(v.id) */}} className='button_margin' sx={{ backgroundColor: red[500], color:'white',margin:'10px' }}/>
+                                </CommentButton>
+                            </CommentBox>
+                        ))}
                     </div>
                 </ShowHideBox>
             </CommentWrap>

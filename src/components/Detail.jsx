@@ -22,12 +22,13 @@ const Detail = () => {
         dispatch(__getTodos());
     }, [dispatch]);
 
-    if (isLoading) {
-        return <div>로딩중</div>;
-    }
-    if (error) {
-        return <div>{error.message}</div>;
-    }
+    // if (isLoading) {
+    //     console.log('isLoading=>',isLoading);
+    //     return <div>로딩중</div>;
+    // }
+    // if (error) {
+    //     return <div>{error.message}</div>;
+    // }
 
     return (
         <DetailTotal>
@@ -79,7 +80,7 @@ const Detail = () => {
                 </DetailBottom>
             </DetailContainer>
             {/* <button onClick={() => { navigate(`/comment`) }}>임시 페이지 이동</button> */}
-            <Comment userId={todos[0].id}/>
+            <Comment />
         </DetailTotal>
 
 

@@ -11,6 +11,7 @@ const initialState = {
 export const __getTodos = createAsyncThunk("todos/getTodos", async (payload, thunkAPI) => {
   try {
     const data = await axios.get("http://localhost:3001/todos");
+    console.log('data=>',data);
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -43,16 +44,17 @@ export const __putTodos = createAsyncThunk("todos/putTodos", async (payload, thu
   }
 });
 
-export const __postComment = createAsyncThunk('todos/postComment', async (payload, thunkAPI) => {
+export const __postComment = createAsyncThunk('comments/postComment', async (payload, thunkAPI) => {
   try {
-    await axios.post('http://localhost:3001/comments', payload);
-    return thunkAPI.fulfillWithValue(payload);
+    const data = await axios.post('http://localhost:3001/comments', payload);
+    // return thunkAPI.fulfillWithValue(payload);
+    return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue("ERROR=>", error);
   }
 });
 
-export const __getComments = createAsyncThunk("todos/getComments", async (payload, thunkAPI) => {
+export const __getComments = createAsyncThunk("comments/getComments", async (payload, thunkAPI) => {
   try {
     const data = await axios.get('http://localhost:3001/comments');
     console.log(data.data);
@@ -61,6 +63,17 @@ export const __getComments = createAsyncThunk("todos/getComments", async (payloa
     return thunkAPI.rejectWithValue(error);
   }
 });
+
+export const __deleteComment = createAsyncThunk("comments/delteComments", async (payload, thunkAPI) => {
+  console.log("__deleteComment=>",payload);
+  try {
+    await axios.delete(`http://localhost:3001/comments/${payload}`);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+
 
 
 export const todosSlice = createSlice({
@@ -136,6 +149,27 @@ export const todosSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    [__deleteComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      console.log(state)
+      console.log(state.todos)
+      console.log(state.comments)
+      console.log(state.todos.comments)
+      console.log(action)
+      console.log(action.payload)
+      state.isLoading = false;
+      state.comments = action.payload;
+    },
+    [__deleteComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+
+
+    
   },
 });
 

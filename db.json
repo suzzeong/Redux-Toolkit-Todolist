@@ -1,6 +1,7 @@
 {
   "todos": [
     {
+<<<<<<< HEAD
       "바껴라 얍": "",
       "id": 4
     },
@@ -9,19 +10,18 @@
       "title": "ㅇㅇㅇ",
       "content": "ㅇㅇㅇ",
       "id": 5
+=======
+      "username": "111",
+      "title": "222",
+      "content": "333",
+      "id": 1
+>>>>>>> 4305d7d622014457368af567f7b3d4f9ca696850
     }
   ],
   "comments": [
     {
-      "id": 2,
-      "title": "리액트2",
-      "content": "delete 구현하기",
-      "username": "작성자이름2"
-    },
-    {
-      "userId": 3,
-      "userName": "asdf",
-      "userContent": "asdf",
+      "usreId": "1",
+      "userContent": "2",
       "id": 3
     },
     {

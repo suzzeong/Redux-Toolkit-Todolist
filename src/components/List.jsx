@@ -26,7 +26,7 @@ const List = () => {
       <StContainer>
         <StList>
           {todos?.map((todo) => (
-            <Todo key={todo.id} id={todo.id} todo={todo}></Todo>
+            <Todo key = {todo.id} id={todo.id} todo={todo} />
           ))}
         </StList>
       </StContainer>
