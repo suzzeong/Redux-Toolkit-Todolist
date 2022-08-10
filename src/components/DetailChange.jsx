@@ -78,7 +78,7 @@ const DetailChange = () => {
             width="100%"
             height="50px"
             onClick={() =>{
-              navigate(-1)
+              // navigate(`/detail/${param.id}`);
             }}
           >
             저장
