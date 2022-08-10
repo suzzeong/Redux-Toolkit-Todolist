@@ -9,9 +9,14 @@
   ],
   "comments": [
     {
-      "usreId": "1",
-      "userContent": "2",
-      "id": 3
+      "userId": 7,
+      "userContent": "에엥",
+      "id": 7
+    },
+    {
+      "userId": 8,
+      "userContent": "강남",
+      "id": 8
     }
   ]
 }

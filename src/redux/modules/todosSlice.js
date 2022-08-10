@@ -66,6 +66,20 @@ export const __deleteComment = createAsyncThunk("comments/delteComments", async 
   console.log("__deleteComment=>",payload);
   try {
     await axios.delete(`http://localhost:3001/comments/${payload}`);
+    return thunkAPI.fulfillWithValue(payload);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+export const __updateComment = createAsyncThunk("comments/updateComments", async (payload, thunkAPI) => {
+  console.log("__updateComment=>",payload);
+  console.log("__updateComment=>",payload.userId);
+  console.log("__updateComment=>",payload.userContent);
+  try {
+    await axios.patch(`http://localhost:3001/comments/${payload.userId}`,payload);
+    thunkAPI.dispatch(__getComments());
+    return thunkAPI.fulfillWithValue(payload);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -97,7 +111,7 @@ export const todosSlice = createSlice({
     [__deleteTodos.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log(action);
-      // state.todos.filter((todo) => todo.id !== action.payload);
+      state.todos.filter((todo) => todo.id !== action.payload);
     },
     [__deleteTodos.rejected]: (state, action) => {
       state.isLoading = false;
@@ -140,16 +154,22 @@ export const todosSlice = createSlice({
       state.isLoading = true;
     },
     [__deleteComment.fulfilled]: (state, action) => {
-      console.log(state)
-      console.log(state.todos)
-      console.log(state.comments)
-      console.log(state.todos.comments)
-      console.log(action)
-      console.log(action.payload)
       state.isLoading = false;
-      state.comments = action.payload;
+      state.comments = state.comments.filter((v) => v.id !== action.payload);
     },
     [__deleteComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__updateComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateComment.fulfilled]: (state, action) => {
+      console.log("actionactio=>",action);
+      state.isLoading = false;
+      // state.comments = state.comments.filter((v) => v.id !== action.payload);
+    },
+    [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
