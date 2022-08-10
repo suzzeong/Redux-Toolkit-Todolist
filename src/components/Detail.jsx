@@ -12,6 +12,7 @@ const Detail = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isLoading, error, todos } = useSelector((state) => state.todos);
+    const todo = todos.find((todo) => todo.id === parseInt(param.id));
 
     // const [updateContent, setUpdateContent] = useState({
     //     todoId : param.id,
@@ -36,9 +37,10 @@ const Detail = () => {
                 <DetailTop>
                     <TodoId>
                         ID : (
-                        {todos.map((todo) => (
+                        {/* {todos.map((todo) => (
                             <div key={todo.id}>{todo.id}</div>
-                        ))}
+                        ))} */}
+                        {todo.id}
                         )
                     </TodoId>
                     <StP
@@ -51,17 +53,19 @@ const Detail = () => {
                 </DetailTop>
                 <Title>
                     <div>
-                        {todos.map((todo) => (
+                        {/* {todos.map((todo) => (
                             <div key={todo.id}>{todo.title}</div>
-                        ))}
+                        ))} */}
+                        {todo.title}
                     </div>
                 </Title>
                 <DetailBottom>
                     <Content>
                         <div>
-                            {todos.map((todo) => (
+                            {/* {todos.map((todo) => (
                                 <div key={todo.id}>{todo.content}</div>
-                            ))}
+                            ))} */}
+                            {todo.content}
                         </div>
                     </Content>
                     <Button
