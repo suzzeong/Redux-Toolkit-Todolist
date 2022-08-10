@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { __postComment, __getComments } from "../redux/modules/todosSlice";
 
 import { useParams } from "react-router-dom";
-import CommentView from './CommentView';
+import CommentView from "./CommentView";
 
-import Button from './elements/Button';
+import Button from "./elements/Button";
 
 const Comment = () => {
   const dispatch = useDispatch();
@@ -17,12 +17,11 @@ const Comment = () => {
 
   useEffect(() => {
     dispatch(__getComments());
-  }, [dispatch])
-
+  }, [dispatch]);
 
   const [comment, setComment] = useState({
-    userName: '',
-    userContent: ''
+    userName: "",
+    userContent: "",
   });
   const param = useParams();
 
@@ -31,77 +30,85 @@ const Comment = () => {
     setComment({
       ...comment,
       userId: param.id,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
   const postComment = (e) => {
     e.preventDefault();
     dispatch(__postComment(comment));
-  }
+  };
   const [commentShow, setCommentShow] = useState(true);
   return (
     <>
       <CommentWrap commentShow={commentShow}>
-        <div onClick={() => { setCommentShow(!commentShow) }}><span style={{ fontSize: "25px" }}>{commentShow ? '댓글 올리기' : '댓글 내리기'}</span></div>
+        <div
+          onClick={() => {
+            setCommentShow(!commentShow);
+          }}
+        >
+          <span style={{ fontSize: "25px" }}>{commentShow ? "댓글 올리기" : "댓글 내리기"}</span>
+        </div>
         <ShowHideBox>
           <CommentForm onSubmit={postComment}>
-            <CommentInputName type="text" name='userName' onChange={onChangeHandler} maxLength='5' placeholder="(이름 5자 이내)" />
-            <CommentInputContent type="text" name='userContent' onChange={onChangeHandler} maxLength='100' placeholder="댓글을 추가하세요.(100자 이내)" />
-            <Button bgcolor='transparent'>추가하기</Button>
+            <CommentInputName type="text" name="userName" onChange={onChangeHandler} maxLength="5" placeholder="(이름 5자 이내)" />
+            <CommentInputContent type="text" name="userContent" onChange={onChangeHandler} maxLength="100" placeholder="댓글을 추가하세요.(100자 이내)" />
+            <Button type="submit" btntype="basic-small">
+              추가하기
+            </Button>
+            {/* <Button bgcolor='transparent'>추가하기</Button> */}
           </CommentForm>
           <CommentLists>
-            {comments.map((v) => (
-              Number(v.userId) === Number(param.id) ? <div key={v.id}><CommentView comment={v} /></div> : null
-            ))}
+            {comments.map((v) =>
+              Number(v.userId) === Number(param.id) ? (
+                <div key={v.id}>
+                  <CommentView comment={v} />
+                </div>
+              ) : null
+            )}
           </CommentLists>
         </ShowHideBox>
       </CommentWrap>
     </>
-  )
-}
+  );
+};
 
 export default Comment;
 
-
 const CommentWrap = styled.div`
-background-color:white;
-    border-top:1px solid #eee;
-    transform: translate(-50%,90%);
-    transform: ${({ commentShow }) => (commentShow ? '' : `translate(-50%, -10%)`)};
-    
-    height: 400px;
-    position: fixed;
-    max-width: 1152px;
-    width: 100%;
-    bottom: 0%;
-    left: 50%;
+  background-color: white;
+  border-top: 1px solid #eee;
+  transform: translate(-50%, 90%);
+  transform: ${({ commentShow }) => (commentShow ? "" : `translate(-50%, -10%)`)};
+
+  height: 400px;
+  position: fixed;
+  max-width: 1152px;
+  width: 100%;
+  bottom: 0%;
+  left: 50%;
 `;
 const ShowHideBox = styled.div`
-    height:100%;
-    width:100%;
+  height: 100%;
+  width: 100%;
 `;
 const CommentForm = styled.form`
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:20%;
-    width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  width: 100%;
 `;
 
 const CommentLists = styled.div`
-    overflow:auto;
-    height:80%;
-    width:100%;
+  overflow: auto;
+  height: 80%;
+  width: 100%;
 `;
 
 const CommentInputName = styled.input`
-    width:20%;
-    margin:0 15px;
+  width: 20%;
+  margin: 0 15px;
 `;
 const CommentInputContent = styled.input`
-    width:80%;
+  width: 80%;
 `;
-
-
-
-
