@@ -96,7 +96,6 @@ const CommentWrap = styled.div`
     width: 100%;
     bottom: 0%;
     left: 50%;
-    
 `;
 const ShowHideBox = styled.div`
     height: 100%;
