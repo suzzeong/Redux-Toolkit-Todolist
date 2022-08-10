@@ -7,6 +7,7 @@ import { __deleteTodos, __getTodos } from "../redux/modules/todosSlice";
 import Button from "./elements/Button";
 
 const Todo = ({ todo }) => {
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

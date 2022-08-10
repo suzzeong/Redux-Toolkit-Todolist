@@ -10,16 +10,17 @@ const DetailChange = () => {
 
   const param = useParams();
   const { isLoading, error, todos } = useSelector((state) => state.todos);
+  const todo = todos.find((todo) => todo.id === parseInt(param.id));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [content, setContent] = useState("")
 
-  const [updateContent, setUpdateContent] = useState("");
+  const [updateContent, setUpdateContent] = useState(todo.content);
 
   useEffect(() => {
     dispatch(__getTodos());
-  }, [dispatch]);
+  }, []);
 
   const handleContent = (e) => {
     // document.getElementById("content")
@@ -28,13 +29,16 @@ const DetailChange = () => {
   };
 
   const onSubmitHandler = () => {
-    console.log(updateContent)
+    console.log(param.id)
     dispatch(
       __putTodos({
+        ...todo,
         id: param.id,
         content: updateContent,
       }
-    ))
+      ))
+    // dispatch(__getTodos())
+    navigate(`/detail/${param.id}`)
   };
 
   if (isLoading) {
@@ -49,25 +53,19 @@ const DetailChange = () => {
       <DetailContainer >
         <DetailTop>
           <div>
-            {todos.map((todo) => (
-              <div key={todo.id}>{todo.title}</div>
-            ))}
+            <div>{todo.title}</div>
           </div>
         </DetailTop>
         <StTextArea>
           <div>
-            {todos.map((todo) => (
-                <textarea
-                  key={todo.id}
-                  // className="content"
-                  onChange={handleContent}
-                  rows="10"
-                  maxLength="200"
-                  style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
-                >
-                  {todo.content}
-                </textarea>
-            ))}
+            <textarea
+              key={todo.id}
+              value={updateContent}
+              onChange={handleContent}
+              rows="10"
+              maxLength="200"
+              style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
+            />
           </div>
         </StTextArea>
         <DetailBottom>
@@ -77,7 +75,7 @@ const DetailChange = () => {
             bgcolor="white"
             width="100%"
             height="50px"
-            onClick={() =>{
+            onClick={() => {
               // navigate(`/detail/${param.id}`);
             }}
           >

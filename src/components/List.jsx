@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Todo from './Todo';
 import { __getTodos } from '../redux/modules/todosSlice';
+import { useParams } from 'react-router-dom';
 
 const List = () => {
 
+  const param = useParams()
   const dispatch = useDispatch();
   const {todos, isLoading, error} = useSelector((state) => state.todos)
 
