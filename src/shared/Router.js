@@ -12,8 +12,8 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path ="/" element={<TodoHome/>}/>
-                {/* <Route path ="/detail/:id" element={<TodoDetail/>}/> */}
-                <Route path ="/detail" element={<TodoDetail/>}/>
+                <Route path ="/detail/:id" element={<TodoDetail/>}/>
+                {/* <Route path ="/detail" element={<TodoDetail/>}/> */}
                 <Route path ="/form" element={<TodoForm/>}/>
                 <Route path ="/todolist" element={<TodoList/>}/>
 
