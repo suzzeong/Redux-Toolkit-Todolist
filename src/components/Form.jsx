@@ -32,11 +32,11 @@ const Form = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (username == "") {
+    if (username === "") {
       return alert("작성자 이름을 입력해주세요");
     } else if (title === "") {
       return alert("제목을 입력해주세요");
-    } else if (content == "") {
+    } else if (content === "") {
       return alert("내용을 입력해주세요");
     }
     dispatch(__postTodos(todo));
@@ -57,9 +57,9 @@ const Form = () => {
             name='username'
             value={username}
             onChange={onChangeHandler}
-            placeholder="작성자의 이름을 입력해주세요. (5자 이내)"
-            width="100%"
-            height="200px"
+            placeholder='작성자의 이름을 입력해주세요. (5자 이내)'
+            width='100%'
+            height='200%'
           />
           <Input
             maxLength='50'
@@ -71,9 +71,9 @@ const Form = () => {
             name='title'
             value={title}
             onChange={onChangeHandler}
-            placeholder="제목을 입력해주세요. (50자 이내)"
-            width="100%"
-            height="200%"
+            placeholder='제목을 입력해주세요. (50자 이내)'
+            width='100%'
+            height='200%'
           />
           <Textarea
             maxLength='200'
@@ -82,17 +82,17 @@ const Form = () => {
             name='content'
             value={content}
             onChange={onChangeHandler}
-            placeholder="내용을 입력해주세요. (200자 이내)"
-            width="100%"
-            height="200px"
+            placeholder='내용을 입력해주세요. (200자 이내)'
+            width='100%'
+            height='200px'
           />
         </FormAddTodoWrap>
-        <Button 
-        type="submit" 
-        bordercolor="rgb(221,221,221)" 
-        bgcolor="white" 
-        width="100%" 
-        height="50px"
+        <Button
+          type='submit'
+          bordercolor='rgb(221,221,221)'
+          bgcolor='white'
+          width='100%'
+          height='50px'
         >
           추가하기
         </Button>
