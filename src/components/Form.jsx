@@ -65,6 +65,8 @@ const Form = () => {
             value={username}
             onChange={onChangeUsernameHandler}
             placeholder="작성자의 이름을 입력해주세요. (5자 이내)"
+            width="100%"
+            height='200%'
           />
           <Input
             maxLength="50"
@@ -77,6 +79,8 @@ const Form = () => {
             value={title}
             onChange={onChangeTitleHandler}
             placeholder="제목을 입력해주세요. (50자 이내)"
+            width="100%"
+            height='200%'
           />
           <Textarea
             cols="50"
@@ -88,6 +92,8 @@ const Form = () => {
             value={content}
             onChange={onChangecontentHandler}
             placeholder="내용을 입력해주세요. (200자 이내)"
+            width='100%'
+            height='200px'
           />
         </FormAddTodoWrap>
         <Button type="submit" btntype="basic">
@@ -111,6 +117,8 @@ const FormSecondWrap = styled.div`
   flex-direction: column;
 `;
 const FormAddTodoWrap = styled.div`
+  width: 100%;
+  height: auto;
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;

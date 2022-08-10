@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import CommentView from "./CommentView";
 
 import Button from "./elements/Button";
+import Input from "./elements/Input";
 
 const Comment = () => {
   const dispatch = useDispatch();
@@ -46,13 +47,29 @@ const Comment = () => {
             setCommentShow(!commentShow);
           }}
         >
-          <span style={{ fontSize: "25px" }}>{commentShow ? "댓글 올리기" : "댓글 내리기"}</span>
+          <span style={{ fontSize: '25px' }}>
+            {commentShow ? '댓글 올리기' : '댓글 내리기'}
+          </span>
         </div>
         <ShowHideBox>
           <CommentForm onSubmit={postComment}>
-            <CommentInputName type="text" name="userName" onChange={onChangeHandler} maxLength="5" placeholder="(이름 5자 이내)" />
-            <CommentInputContent type="text" name="userContent" onChange={onChangeHandler} maxLength="100" placeholder="댓글을 추가하세요.(100자 이내)" />
-            <Button type="submit" btntype="basic-small">
+            <Input
+              type='text'
+              name='userName'
+              onChange={onChangeHandler}
+              maxLength='5'
+              placeholder='(이름 5자 이내)'
+              width='200px'
+            />
+            <Input
+              type='text'
+              name='userContent'
+              onChange={onChangeHandler}
+              maxLength='100'
+              placeholder='댓글을 추가하세요.(100자 이내)'
+              width='500px'
+            />
+            <Button type='submit' btntype='basic-small'>
               추가하기
             </Button>
             {/* <Button bgcolor='transparent'>추가하기</Button> */}
@@ -103,12 +120,4 @@ const CommentLists = styled.div`
   overflow: auto;
   height: 80%;
   width: 100%;
-`;
-
-const CommentInputName = styled.input`
-  width: 20%;
-  margin: 0 15px;
-`;
-const CommentInputContent = styled.input`
-  width: 80%;
 `;
