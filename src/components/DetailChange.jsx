@@ -1,36 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
-// import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "./elements/Button";
+import Textarea from "./elements/Textarea";
+import useTextarea from "../hooks/useTextarea";
 
 const DetailChange = () => {
-  const { isLoading, error, todos } = useSelector((state) => state.todos);
 
+  const param = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [content, setContent] = useState("")
 
-  const [updateContent, setUpdateContent] = useState(todos.content);
+  const { isLoading, error, todos } = useSelector((state) => state.todos);
+  const todo = todos.find((todo) => todo.id === parseInt(param.id));
+
+  // custom hook 사용(useInput)
+  const [updateContent, handleContent] = useTextarea("")
 
   useEffect(() => {
     dispatch(__getTodos());
   }, [dispatch]);
 
-  const handleContent = (e) => {
-    // document.getElementById("content")
-    //     .addEventListener("input", (event) => alert("change!"))
-    setUpdateContent(e.target.value);
-  };
-
-  const onSubmitHandler = () => {
-    const _inputData = {
-      updateContent: updateContent,
-    };
-    dispatch(__putTodos(_inputData));
-    setUpdateContent("");
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+    console.log(param.id)
+    dispatch(
+      __putTodos({
+        ...todo,
+        id: param.id,
+        content: updateContent,
+      })
+    );
+    // dispatch(__getTodos())
+    navigate(`/detail/${param.id}`);
   };
 
   if (isLoading) {
@@ -45,25 +49,20 @@ const DetailChange = () => {
       <DetailContainer>
         <DetailTop>
           <div>
-            {todos.map((todo) => (
-              <div key={todo.id}>{todo.title}</div>
-            ))}
+            <div>{todo.title}</div>
           </div>
         </DetailTop>
         <StTextArea>
           <div>
-            {todos.map((todo) => (
-              <textarea
-                key={todo.id}
-                className="content"
-                onChange={handleContent}
-                rows="10"
-                maxLength="200"
-                style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
-              >
-                {todo.content}
-              </textarea>
-            ))}
+            <Textarea
+              key={todo.id}
+              value={updateContent}
+              onChange={handleContent}
+              rows="10"
+              maxLength="200"
+              width="100%"
+              height="200px"
+            />
           </div>
         </StTextArea>
         <DetailBottom>
@@ -73,9 +72,9 @@ const DetailChange = () => {
             bgcolor="white"
             width="100%"
             height="50px"
-            onClick={() => {
-              navigate(-1);
-            }}
+            // onClick={() => {
+            //   // navigate(`/detail/${param.id}`);
+            // }}
           >
             저장
           </Button>
@@ -87,7 +86,7 @@ const DetailChange = () => {
 };
 export default DetailChange;
 
-const DetailTotal = styled.div``;
+const DetailTotal = styled.form``;
 
 const DetailContainer = styled.div`
   /* height: calc(100vh - 45px); */

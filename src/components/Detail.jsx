@@ -1,15 +1,24 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { __getTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
 import Button from "./elements/Button";
 import Comment from './Comment';
 
 const Detail = () => {
+
+    const param = useParams()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isLoading, error, todos } = useSelector((state) => state.todos);
+    const todo = todos.find((todo) => todo.id === parseInt(param.id));
+
+    // const [updateContent, setUpdateContent] = useState({
+    //     todoId : param.id,
+    //     content : "",
+    // })
+
     useEffect(() => {
         dispatch(__getTodos());
     }, [dispatch]);
@@ -28,14 +37,15 @@ const Detail = () => {
                 <DetailTop>
                     <TodoId>
                         ID : (
-                        {todos.map((todo) => (
+                        {/* {todos.map((todo) => (
                             <div key={todo.id}>{todo.id}</div>
-                        ))}
+                        ))} */}
+                        {todo.id}
                         )
                     </TodoId>
                     <StP
                         onClick={() => {
-                            navigate(-1);
+                            navigate("/todolist")
                         }}
                     >
                         이전으로
@@ -43,30 +53,33 @@ const Detail = () => {
                 </DetailTop>
                 <Title>
                     <div>
-                        {todos.map((todo) => (
+                        {/* {todos.map((todo) => (
                             <div key={todo.id}>{todo.title}</div>
-                        ))}
+                        ))} */}
+                        {todo.title}
                     </div>
                 </Title>
                 <DetailBottom>
                     <Content>
                         <div>
-                            {todos.map((todo) => (
+                            {/* {todos.map((todo) => (
                                 <div key={todo.id}>{todo.content}</div>
-                            ))}
+                            ))} */}
+                            {todo.content}
                         </div>
                     </Content>
                     <Button
-                        type="submit"
+                        type="button"
                         bordercolor="rgb(221,221,221)"
                         bgcolor="white"
                         width="100%"
                         height="50px"
                         onClick={() => {
-                            navigate("/detailchange");
+                            navigate(`/detail/${param.id}/change`);
                         }}
                     >
-                        {todos.isDone === true ? "저장" : "수정"}
+                        {/* {todos.isDone === true ? "저장" : "수정"} */}
+                        수정
                     </Button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
                 </DetailBottom>

@@ -18,7 +18,7 @@ const Router = () => {
                 <Route path ="/todolist" element={<TodoList/>}/>
 
                 <Route path ="/comment" element={<Comment/>}/>
-                <Route path ="/detailchange" element={<TodoDetailChange/>}/>
+                <Route path ="/detail/:id/change" element={<TodoDetailChange/>}/>
             </Routes>
         </BrowserRouter>
     )
