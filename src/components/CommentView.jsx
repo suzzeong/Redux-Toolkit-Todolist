@@ -13,37 +13,38 @@ import Input from "./elements/Input";
 const CommentView = ({comment}) => {
     const dispatch = useDispatch();
     
+    const [editComment, setEditComment] = React.useState(false);
+
     let updateCommentInput = (id) => {
         if(editComment){
             setEditComment(false);
         }else{
             setEditComment(true);
         }
-        
+
     }
 
     const deleteBtn = (id) => {
         dispatch(__deleteComment(id));
     }
 
-    const [editComment, setEditComment] = useState(false);
+    const [updateComment, setUpdateComment] = React.useState({
+        id:'',
+        userContent:''
 
-    const [updateComment, setUpdateComment] = useState({
-        id:comment.id,
-        content:''
-    });
 
     const changeEvent = (e) => {
-        const {name,value} = e.target;
         setUpdateComment({
-            userId:comment.id,
-            [name]:value
-        })
+            id:comment.id,
+            userContent:e.target.value
+    })}
         
-    }
-    const updateCommentAction = () => {
+    // }
+    // console.log("AAAAAAAAAAAAAAA->",updateComment);
+    const updateCommentAction = (id) => {
+        console.log("WH=>",updateComment);
         dispatch(__updateComment(updateComment));
-        updateCommentInput(comment.id);
+        updateCommentInput(id);
     }
     return (
         <>
