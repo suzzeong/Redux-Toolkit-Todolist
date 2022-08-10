@@ -14,7 +14,7 @@ const CommentView = ({comment}) => {
     const dispatch = useDispatch();
 
     const [editComment, setEditComment] = React.useState(false);
-    
+
     let updateCommentInput = (id) => {
         if(editComment){
             setEditComment(false);

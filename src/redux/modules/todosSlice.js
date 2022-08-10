@@ -88,8 +88,7 @@ export const __updateComment = createAsyncThunk("comments/updateComments", async
   console.log("__updateComment=>",payload.id);
   console.log("__updateComment=>",payload.userContent);
   try {
-    // await axios.patch(`http://localhost:3001/comments/${payload.userId}`,payload);
-    await axios.patch(`https://redux-toolkit-todolist.herokuapp.com/comments/${payload.userId}`,payload);
+    await axios.patch(`http://localhost:3001/comments/${payload.id}`, payload);
     thunkAPI.dispatch(__getComments());
     return thunkAPI.fulfillWithValue(payload);
   } catch (error) {

@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import CommentView from './CommentView';
 
 import Button from './elements/Button';
-import Input from "./elements/Input";
 
 const Comment = () => {
   const dispatch = useDispatch();
@@ -106,13 +105,6 @@ const CommentInputContent = styled.input`
     width:80%;
 `;
 
-// const CommentInputName = styled.input`
-//     width:120px;
-//     margin:0 15px;
-// `;
-// const CommentInputContent = styled.input`
-//     width:1600px;
-// `;
 
 
 
