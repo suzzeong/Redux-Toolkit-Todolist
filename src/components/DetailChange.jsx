@@ -21,7 +21,7 @@ const DetailChange = () => {
 
   useEffect(() => {
     dispatch(__getTodos());
-  }, []);
+  }, [dispatch]);
 
   const handleContent = (e) => {
     // document.getElementById("content")
