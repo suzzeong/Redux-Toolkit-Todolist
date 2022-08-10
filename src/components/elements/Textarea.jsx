@@ -46,9 +46,12 @@ const Stlabel = styled.label`
   margin-bottom: 10px;
 `;
 
-const StTextarea = styled.input`
+const StTextarea = styled.textarea`
   // 줄바꿈....(해결못함)
-  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap;
+  resize: none;
   box-sizing: border-box;
   border: 1px solid rgb(238, 238, 238);
   margin-bottom: 40px;
@@ -56,7 +59,7 @@ const StTextarea = styled.input`
   height: ${({ height }) => `${height}`};
   padding: 12px;
   border-radius: 5px;
-  resize: none;
+  /* resize: none; */
   font-size: 14px;
   :hover {
     border: 1px solid #457be1;
