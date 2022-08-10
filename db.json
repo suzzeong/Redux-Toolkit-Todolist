@@ -1,23 +1,16 @@
 {
   "todos": [
     {
-      "username": "미리미리",
-      "title": "청운청운",
-      "content": "수정원호",
-      "id": 3
+      "username": "111",
+      "title": "222",
+      "content": "333",
+      "id": 1
     }
   ],
   "comments": [
     {
-      "id": 2,
-      "title": "리액트2",
-      "content": "delete 구현하기",
-      "username": "작성자이름2"
-    },
-    {
-      "userId": 3,
-      "userName": "asdf",
-      "userContent": "asdf",
+      "usreId": "1",
+      "userContent": "2",
       "id": 3
     }
   ]
