@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Input = (props) => {
-  const { maxLength, pattern, title, fontsize, label, id, value, name, onChange, placeholder } = props;
+  const { maxLength, pattern, title, fontsize, label, id, value, name, onChange, placeholder, width, height } = props;
   return (
     <InputWrap>
       <Stlabel fontsize={fontsize}>{label}</Stlabel>
@@ -15,6 +15,8 @@ const Input = (props) => {
         name={name}
         onChange={onChange}
         placeholder={placeholder}
+        width={width}
+        height={height}
       />
     </InputWrap>
   );
@@ -24,15 +26,6 @@ export default Input;
 
 const InputWrap = styled.div``;
 
-// const InputWrap = styled.div`
-//   color: green;
-//   border: 1px solid blue;
-//   display: flex;
-//   flex-direction: column;
-//   width: 100px;
-//   height: 100px;
-// `;
-
 const Stlabel = styled.label`
   display: block;
   font-size: ${(props) => props.fontsize};
@@ -41,11 +34,12 @@ const Stlabel = styled.label`
 `;
 
 const StInput = styled.input`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   word-wrap: break-word;
   box-sizing: border-box;
   border: 1px solid rgb(238,238,238);
   margin-bottom: 40px;
-  width: 100%;
   height: auto;
   padding: 12px;
   border-radius: 5px;

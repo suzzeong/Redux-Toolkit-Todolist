@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 import { useDispatch } from "react-redux";
 import { __deleteComment,__updateComment } from "../redux/modules/todosSlice";
@@ -8,9 +8,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { red } from '@mui/material/colors';
 
 import Button from './elements/Button';
+import Input from "./elements/Input";
 
 const CommentView = ({comment}) => {
-    console.log("COMMENT=>",comment);
     const dispatch = useDispatch();
     
     let updateCommentInput = (id) => {
@@ -19,19 +19,16 @@ const CommentView = ({comment}) => {
         }else{
             setEditComment(true);
         }
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",id);
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",editComment);
         
     }
 
     const deleteBtn = (id) => {
-        console.log(id);
         dispatch(__deleteComment(id));
     }
 
-    const [editComment, setEditComment] = React.useState(false);
+    const [editComment, setEditComment] = useState(false);
 
-    const [updateComment, setUpdateComment] = React.useState({
+    const [updateComment, setUpdateComment] = useState({
         id:comment.id,
         content:''
     });
@@ -50,24 +47,73 @@ const CommentView = ({comment}) => {
     }
     return (
         <>
-            <div>
-                <CommentBox>
-                    <CommentContent>
-                        {
-                            !editComment?<div><CommentTop className="comment_view">{comment.userName}</CommentTop>
-                            <CommentBottom className="comment_view">{comment.userContent}</CommentBottom></div>:<input onChange={changeEvent} name='userContent' type="text"/>
-                        }
-                    </CommentContent>
-                    <CommentButton>
-                        {
-                            !editComment?<div><EditIcon onClick={()=>{updateCommentInput(comment.id)}} className='button_margin' sx={{ backgroundColor: red[500], color:'white',margin:'10px',cursor:'pointer' }}/>
-                            <DeleteIcon onClick={()=>{deleteBtn(comment.id)}} className='button_margin' sx={{ backgroundColor: red[500], color:'white',margin:'10px',cursor:'pointer' }}/></div>:<div><Button onClick={()=>{updateCommentInput(comment.id)}}>취소</Button><Button onClick={()=>{updateCommentAction(comment.id)}}>저장</Button></div>
-                        }
-                    </CommentButton>
-                </CommentBox>
-            </div>
-        </>
-    )
+        <div>
+          <CommentBox>
+            <CommentContent>
+              {!editComment ? (
+                <div>
+                  <CommentTop className='comment_view'>
+                    {comment.userName}
+                  </CommentTop>
+                  <CommentBottom className='comment_view'>
+                    {comment.userContent}
+                  </CommentBottom>
+                </div>
+              ) : (
+                <Input onChange={changeEvent} name='userContent' type='text' />
+              )}
+            </CommentContent>
+            <CommentButton>
+              {!editComment ? (
+                <div>
+                  <EditIcon
+                    onClick={() => {
+                      updateCommentInput(comment.id);
+                    }}
+                    className='button_margin'
+                    sx={{
+                      backgroundColor: red[500],
+                      color: 'white',
+                      margin: '10px',
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <DeleteIcon
+                    onClick={() => {
+                      deleteBtn(comment.id);
+                    }}
+                    className='button_margin'
+                    sx={{
+                      backgroundColor: red[500],
+                      color: 'white',
+                      margin: '10px',
+                      cursor: 'pointer',
+                    }}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <Button
+                    onClick={() => {
+                      updateCommentInput(comment.id);
+                    }}
+                  >
+                    취소
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      updateCommentAction(comment.id);
+                    }}
+                  >
+                    저장
+                  </Button>
+                </div>
+              )}
+            </CommentButton>
+          </CommentBox>
+        </div>
+      </>
+    );
 }
 
 export default CommentView;
