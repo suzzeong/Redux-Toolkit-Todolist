@@ -5,6 +5,7 @@ import styled from "styled-components";
 // import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "./elements/Button";
+import Textarea from "./elements/Textarea";
 
 const DetailChange = () => {
 
@@ -28,7 +29,8 @@ const DetailChange = () => {
     setUpdateContent(e.target.value);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
     console.log(param.id)
     dispatch(
       __putTodos({
@@ -50,7 +52,7 @@ const DetailChange = () => {
 
   return (
     <DetailTotal onSubmit={onSubmitHandler}>
-      <DetailContainer >
+      <DetailContainer>
         <DetailTop>
           <div>
             <div>{todo.title}</div>
@@ -58,13 +60,14 @@ const DetailChange = () => {
         </DetailTop>
         <StTextArea>
           <div>
-            <textarea
+            <Textarea
               key={todo.id}
               value={updateContent}
               onChange={handleContent}
               rows="10"
               maxLength="200"
-              style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
+              width="100%"
+              height="200px"
             />
           </div>
         </StTextArea>
@@ -75,9 +78,9 @@ const DetailChange = () => {
             bgcolor="white"
             width="100%"
             height="50px"
-            onClick={() => {
-              // navigate(`/detail/${param.id}`);
-            }}
+            // onClick={() => {
+            //   // navigate(`/detail/${param.id}`);
+            // }}
           >
             저장
           </Button>

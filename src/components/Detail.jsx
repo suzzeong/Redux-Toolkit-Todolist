@@ -45,7 +45,7 @@ const Detail = () => {
                     </TodoId>
                     <StP
                         onClick={() => {
-                            navigate(-1);
+                            navigate("/todolist")
                         }}
                     >
                         이전으로
@@ -69,7 +69,7 @@ const Detail = () => {
                         </div>
                     </Content>
                     <Button
-                        type="submit"
+                        type="button"
                         bordercolor="rgb(221,221,221)"
                         bgcolor="white"
                         width="100%"
@@ -78,7 +78,8 @@ const Detail = () => {
                             navigate(`/detail/${param.id}/change`);
                         }}
                     >
-                        {todos.isDone === true ? "저장" : "수정"}
+                        {/* {todos.isDone === true ? "저장" : "수정"} */}
+                        수정
                     </Button>
                     {/* 수정버튼 엘리먼트로 바꾸기 */}
                 </DetailBottom>
