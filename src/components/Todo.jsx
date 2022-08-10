@@ -7,7 +7,6 @@ import { __deleteTodos } from "../redux/modules/todosSlice";
 import Button from "./elements/Button";
 
 const Todo = ({ todo }) => {
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,9 +30,10 @@ const Todo = ({ todo }) => {
         {/* <StTodobutton type='button' onClick={onClickDeleteButtonHandler}>
           <DeleteIcon />
         </StTodobutton> */}
-        <Button bordercolor="rgb(221,221,221)" bgcolor="white" width="30px" height="30px" onClick={onClickDeleteButtonHandler}>
-          <DeleteIcon />
-        </Button>
+        <Button uibutton="delete" btntype="ui-list" onClick={onClickDeleteButtonHandler} />
+        {/* <Button bordercolor="rgb(221,221,221)" bgcolor="white" width="30px" height="30px" > */}
+        {/* <DeleteIcon />
+        </Button> */}
       </StTodo>
       <StTodoUsername>작성자: {todo.username}</StTodoUsername>
     </StTodoContainer>

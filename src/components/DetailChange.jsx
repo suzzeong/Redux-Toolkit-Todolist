@@ -8,7 +8,6 @@ import Textarea from "./elements/Textarea";
 import useTextarea from "../hooks/useTextarea";
 
 const DetailChange = () => {
-
   const param = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,14 +16,14 @@ const DetailChange = () => {
   const todo = todos.find((todo) => todo.id === parseInt(param.id));
 
   // custom hook 사용(useInput)
-  const [updateContent, handleContent] = useTextarea("")
+  const [updateContent, handleContent] = useTextarea("");
 
   useEffect(() => {
     dispatch(__getTodos());
   }, [dispatch]);
 
   const onSubmitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(
       __putTodos({
         ...todo,
@@ -53,28 +52,11 @@ const DetailChange = () => {
         </DetailTop>
         <StTextArea>
           <div>
-            <Textarea
-              key={todo.id}
-              value={updateContent}
-              onChange={handleContent}
-              rows="10"
-              maxLength="200"
-              width="100%"
-              height="200px"
-            />
+            <Textarea key={todo.id} value={updateContent} onChange={handleContent} rows="10" maxLength="200" width="100%" height="200px" />
           </div>
         </StTextArea>
         <DetailBottom>
-          <Button
-            type="submit"
-            bordercolor="rgb(221,221,221)"
-            bgcolor="white"
-            width="100%"
-            height="50px"
-            // onClick={() => {
-            //   // navigate(`/detail/${param.id}`);
-            // }}
-          >
+          <Button type="submit" btntype="basic">
             저장
           </Button>
         </DetailBottom>
