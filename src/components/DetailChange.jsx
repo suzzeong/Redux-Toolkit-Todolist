@@ -25,7 +25,6 @@ const DetailChange = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault()
-    console.log(param.id)
     dispatch(
       __putTodos({
         ...todo,

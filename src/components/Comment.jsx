@@ -14,7 +14,6 @@ const Comment = () => {
 
   // const  {comments}  = useSelector((state) => state.todos);
   const comments = useSelector((state) => state.todos.comments);
-  console.log("comments=>", comments);
 
   useEffect(() => {
     dispatch(__getComments());
@@ -29,7 +28,6 @@ const Comment = () => {
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
-    console.log(value, name);
     setComment({
       ...comment,
       userId: param.id,
@@ -38,7 +36,6 @@ const Comment = () => {
   }
   const postComment = (e) => {
     e.preventDefault();
-    console.log("comment->", comment);
     dispatch(__postComment(comment));
   }
   const [commentShow, setCommentShow] = useState(true);

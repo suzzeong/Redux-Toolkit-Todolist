@@ -40,7 +40,6 @@ export const __postTodos = createAsyncThunk("todos/postTodos", async (payload, t
 });
 
 export const __putTodos = createAsyncThunk("todos/putTodos", async (payload, thunkAPI) => {
-  console.log(payload.content)
   try {
     // await axios.patch(`http://localhost:3001/todos/${payload.id}`, payload);
     await axios.patch(`https://redux-toolkit-todolist.herokuapp.com/todos/${payload.id}`, payload);
@@ -65,7 +64,6 @@ export const __getComments = createAsyncThunk("comments/getComments", async (pay
   try {
     // const data = await axios.get('http://localhost:3001/comments');
     const data = await axios.get('https://redux-toolkit-todolist.herokuapp.com/comments');
-    console.log(data.data);
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -73,7 +71,6 @@ export const __getComments = createAsyncThunk("comments/getComments", async (pay
 });
 
 export const __deleteComment = createAsyncThunk("comments/delteComments", async (payload, thunkAPI) => {
-  console.log("__deleteComment=>",payload);
   try {
     // await axios.delete(`http://localhost:3001/comments/${payload}`);
     await axios.delete(`https://redux-toolkit-todolist.herokuapp.com/comments/${payload}`);
@@ -84,9 +81,6 @@ export const __deleteComment = createAsyncThunk("comments/delteComments", async 
 });
 
 export const __updateComment = createAsyncThunk("comments/updateComments", async (payload, thunkAPI) => {
-  console.log("__updateComment=>",payload);
-  console.log("__updateComment=>",payload.id);
-  console.log("__updateComment=>",payload.userContent);
   try {
     await axios.patch(`https://redux-toolkit-todolist.herokuapp.com/comments/${payload.id}`, payload);
     thunkAPI.dispatch(__getComments());
@@ -192,7 +186,6 @@ export const todosSlice = createSlice({
       state.isLoading = true;
     },
     [__updateComment.fulfilled]: (state, action) => {
-      console.log("actionactio=>",action);
       state.isLoading = false;
     },
     [__updateComment.rejected]: (state, action) => {

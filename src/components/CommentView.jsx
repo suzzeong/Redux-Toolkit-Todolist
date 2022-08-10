@@ -38,10 +38,7 @@ const CommentView = ({comment}) => {
             userContent:e.target.value
     })}
 
-     // }
-    // console.log("AAAAAAAAAAAAAAA->",updateComment);
     const updateCommentAction = (id) => {
-        console.log("WH=>",updateComment);
         dispatch(__updateComment(updateComment));
         updateCommentInput(id);
     }
