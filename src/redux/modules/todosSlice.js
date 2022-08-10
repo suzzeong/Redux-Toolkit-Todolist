@@ -10,6 +10,7 @@ const initialState = {
 
 export const __getTodos = createAsyncThunk("todos/getTodos", async (payload, thunkAPI) => {
   try {
+    // const data = await axios.get("http://localhost:3001/todos");
     const data = await axios.get("http://localhost:3001/todos");
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
