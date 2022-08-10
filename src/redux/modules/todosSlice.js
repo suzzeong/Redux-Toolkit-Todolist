@@ -19,7 +19,9 @@ export const __getTodos = createAsyncThunk("todos/getTodos", async (payload, thu
 
 export const __deleteTodos = createAsyncThunk("todos/deleteTodos", async (payload, thunkAPI) => {
   try {
-    await axios.delete(`http://localhost:3001/todos/${payload}`);
+    const data = await axios.delete(`http://localhost:3001/todos/${payload}`);
+    thunkAPI.dispatch(__getTodos())
+    return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -37,8 +39,7 @@ export const __postTodos = createAsyncThunk("todos/postTodos", async (payload, t
 export const __putTodos = createAsyncThunk("todos/putTodos", async (payload, thunkAPI) => {
   console.log(payload.content)
   try {
-    const data = await axios.patch(`http://localhost:3001/todos/${payload.id}`, payload);
-    console.log(data)
+    await axios.patch(`http://localhost:3001/todos/${payload.id}`, payload);
     return thunkAPI.fulfillWithValue(payload);
   } catch (error) {
     // return thunkAPI.rejectWithValue(error);
