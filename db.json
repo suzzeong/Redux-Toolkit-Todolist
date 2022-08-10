@@ -9,20 +9,15 @@
   ],
   "comments": [
     {
-      "usreId": "1",
-      "userContent": "2",
-      "id": 3
+      "userId": 7,
+      "userContent": "에엥",
+      "id": 7
     },
     {
-      "userId": 3,
-      "userName": "안녕",
-      "userContent": "되겠지?",
-      "id": 4
-    },
-    {
-      "usreId": "1",
-      "userContent": "되라되라",
-      "id": 5
+      "userId": 8,
+      "userContent": "강남",
+      "id": 8
+
     }
   ]
 }
