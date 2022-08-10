@@ -85,7 +85,7 @@ export const __deleteComment = createAsyncThunk("comments/delteComments", async 
 
 export const __updateComment = createAsyncThunk("comments/updateComments", async (payload, thunkAPI) => {
   console.log("__updateComment=>",payload);
-  console.log("__updateComment=>",payload.userId);
+  console.log("__updateComment=>",payload.id);
   console.log("__updateComment=>",payload.userContent);
   try {
     // await axios.patch(`http://localhost:3001/comments/${payload.userId}`,payload);
@@ -195,7 +195,6 @@ export const todosSlice = createSlice({
     [__updateComment.fulfilled]: (state, action) => {
       console.log("actionactio=>",action);
       state.isLoading = false;
-      // state.comments = state.comments.filter((v) => v.id !== action.payload);
     },
     [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;
