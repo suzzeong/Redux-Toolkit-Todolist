@@ -1,15 +1,22 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { __getTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
 import Button from "./elements/Button";
 import Comment from './Comment';
 
 const Detail = () => {
+
+    const param = useParams()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isLoading, error, todos } = useSelector((state) => state.todos);
+
+    // const [updateContent, setUpdateContent] = useState({
+    //     todoId : param.id,
+    //     content : "",
+    // })
 
     useEffect(() => {
         dispatch(__getTodos());
@@ -63,7 +70,7 @@ const Detail = () => {
                         width="100%"
                         height="50px"
                         onClick={() => {
-                            navigate("/detailchange");
+                            navigate(`/detail/${param.id}/change`);
                         }}
                     >
                         {todos.isDone === true ? "저장" : "수정"}

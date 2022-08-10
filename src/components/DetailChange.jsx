@@ -3,17 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
 // import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "./elements/Button";
 
 const DetailChange = () => {
+
+  const param = useParams();
   const { isLoading, error, todos } = useSelector((state) => state.todos);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [content, setContent] = useState("")
 
-  const [updateContent, setUpdateContent] = useState(todos.content);
+  const [updateContent, setUpdateContent] = useState("");
 
   useEffect(() => {
     dispatch(__getTodos());
@@ -26,11 +28,13 @@ const DetailChange = () => {
   };
 
   const onSubmitHandler = () => {
-    const _inputData = {
-      updateContent: updateContent,
-    };
-    dispatch(__putTodos(_inputData));
-    setUpdateContent("");
+    console.log(updateContent)
+    dispatch(
+      __putTodos({
+        id: param.id,
+        content: updateContent,
+      }
+    ))
   };
 
   if (isLoading) {
@@ -42,7 +46,7 @@ const DetailChange = () => {
 
   return (
     <DetailTotal onSubmit={onSubmitHandler}>
-      <DetailContainer>
+      <DetailContainer >
         <DetailTop>
           <div>
             {todos.map((todo) => (
@@ -53,16 +57,16 @@ const DetailChange = () => {
         <StTextArea>
           <div>
             {todos.map((todo) => (
-              <textarea
-                key={todo.id}
-                className="content"
-                onChange={handleContent}
-                rows="10"
-                maxLength="200"
-                style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
-              >
-                {todo.content}
-              </textarea>
+                <textarea
+                  key={todo.id}
+                  // className="content"
+                  onChange={handleContent}
+                  rows="10"
+                  maxLength="200"
+                  style={{ border: "1px solid rgb(238,238,238)", padding: "12px", fontSize: "14px", width: "100%" }}
+                >
+                  {todo.content}
+                </textarea>
             ))}
           </div>
         </StTextArea>
@@ -73,21 +77,21 @@ const DetailChange = () => {
             bgcolor="white"
             width="100%"
             height="50px"
-            onClick={() => {
-              navigate(-1);
+            onClick={() =>{
+              navigate(-1)
             }}
           >
             저장
           </Button>
         </DetailBottom>
       </DetailContainer>
-      <DetailComment onClick={() => {}}>눌러서 댓글보기</DetailComment>
+      <DetailComment onClick={() => { }}>눌러서 댓글보기</DetailComment>
     </DetailTotal>
   );
 };
 export default DetailChange;
 
-const DetailTotal = styled.div``;
+const DetailTotal = styled.form``;
 
 const DetailContainer = styled.div`
   /* height: calc(100vh - 45px); */

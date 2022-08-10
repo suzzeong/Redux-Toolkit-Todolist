@@ -25,7 +25,7 @@ const Todo = ({ todo }) => {
   return (
     <StTodoContainer
       onClick={() => {
-        navigate(`/detail`);
+        navigate(`/detail/${todo.id}`);
         // `/detail/${todo.id}` 요렇게 수정해야 한다.
       }}
     >

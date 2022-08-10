@@ -9,14 +9,18 @@ import { useDispatch,useSelector } from "react-redux";
 import { __postComment,__getComments } from "../redux/modules/todosSlice";
 
 const Comment = ({userId}) => {
+
     const dispatch = useDispatch();
     // const  comments  = useSelector((state) => state.todos);
     const  { comments }  = useSelector((state) => state.todos);
     console.log("comments=>",comments);
 
+    const [comment, setComment] = useState({
+        userId:userId,
+    });
+
     // useEffect(() => {
     //     dispatch(__getComments());
-    //     console.log("ABCDEFGHIJKLMN");
     //     }, [dispatch])
 
     // comments.map((v)=>{console.log("MAP=>",v)})
@@ -25,9 +29,7 @@ const Comment = ({userId}) => {
     const showComment = () => {
 
     }
-    const [comment, setComment] = useState({
-        userId:userId,
-    });
+
     const onChangeHandler = (e) => {
         const {value,name} = e.target;
         setComment({
@@ -37,11 +39,11 @@ const Comment = ({userId}) => {
     }
     
     const postComment = (e) => {
-        e.preventDefault();
         console.log(e);
         console.log('comment->',comment);
         dispatch(__postComment(comment));
     }
+
     return(
         <>
             <CommentWrap>
