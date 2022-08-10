@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getTodos, __putTodos } from "../redux/modules/todosSlice";
 import styled from "styled-components";
-// import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "./elements/Button";
 import Textarea from "./elements/Textarea";
+import useTextarea from "../hooks/useTextarea";
 
 const DetailChange = () => {
 
   const param = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { isLoading, error, todos } = useSelector((state) => state.todos);
   const todo = todos.find((todo) => todo.id === parseInt(param.id));
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  // const [content, setContent] = useState("")
-
-  const [updateContent, setUpdateContent] = useState(todo.content);
+  // custom hook 사용(useInput)
+  const [updateContent, handleContent] = useTextarea("")
 
   useEffect(() => {
     dispatch(__getTodos());
   }, [dispatch]);
-
-  const handleContent = (e) => {
-    // document.getElementById("content")
-    //     .addEventListener("input", (event) => alert("change!"))
-    setUpdateContent(e.target.value);
-  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault()
