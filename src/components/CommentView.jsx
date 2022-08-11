@@ -24,7 +24,7 @@ const CommentView = ({ comment }) => {
 
   const [updateComment, setUpdateComment] = useState({
     id: "",
-    userContent: "",
+    userContent: comment.userContent,
   });
 
   const changeEvent = (e) => {
@@ -34,7 +34,7 @@ const CommentView = ({ comment }) => {
     });
   };
 
-  const updateCommentAction = (id) => {
+  const updateCommentAction = () => {
     dispatch(__updateComment(updateComment));
     updateCommentInput();
   };
@@ -49,7 +49,7 @@ const CommentView = ({ comment }) => {
                 <CommentBottom className="comment_view">{comment.userContent}</CommentBottom>
               </div>
             ) : (
-              <Input onChange={changeEvent} name="userContent" type="text" value={comment.userContent}/>
+              <Input onChange={changeEvent} name="userContent" type="text" value={updateComment.userContent}/>
             )}
           </CommentContent>
           <CommentButton>
@@ -83,7 +83,7 @@ const CommentView = ({ comment }) => {
                 <Button
                   btntype="ui-comment"
                   onClick={() => {
-                    updateCommentAction(comment.id);
+                    updateCommentAction();
                   }}
                 >
                   저장
