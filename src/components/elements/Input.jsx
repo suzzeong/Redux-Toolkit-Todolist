@@ -1,22 +1,32 @@
 import styled from "styled-components";
 
 const Input = (props) => {
-  const { maxLength, pattern, title, fontsize, label, id, value, name, onChange, placeholder, width, height } = props;
+  const {
+    maxLength,
+    pattern,
+    title,
+    id,
+    value,
+    name,
+    onChange,
+    placeholder,
+    width,
+    margin,
+  } = props;
   return (
     <InputWrap>
-      <Stlabel fontsize={fontsize}>{label}</Stlabel>
       <StInput
         maxLength={maxLength}
         pattern={pattern}
         title={title}
         id={id}
-        type="text"
+        type='text'
         value={value}
         name={name}
         onChange={onChange}
         placeholder={placeholder}
         width={width}
-        height={height}
+        margin={margin}
       />
     </InputWrap>
   );
@@ -26,25 +36,21 @@ export default Input;
 
 const InputWrap = styled.div``;
 
-const Stlabel = styled.label`
-  display: block;
-  font-size: ${(props) => props.fontsize};
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
 const StInput = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   word-wrap: break-word;
   box-sizing: border-box;
-  border: 1px solid rgb(238,238,238);
-  margin-bottom: 40px;
-  height: auto;
+  border: 1px solid rgb(238, 238, 238);
+  margin: ${(props) => props.margin};
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 46px;
   padding: 12px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 14px;
   :hover {
-    border: 1px solid #457be1;
+    border: 1px solid rgb(254, 83, 31);
   }
 `;

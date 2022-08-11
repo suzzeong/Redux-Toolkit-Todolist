@@ -44,11 +44,10 @@ const Stlabel = styled.label`
   display: block;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: 20px 0;
 `;
 
 const StTextarea = styled.textarea`
-  // 줄바꿈....(해결못함)
   overflow-wrap: break-word;
   word-break: break-all;
   white-space: pre-wrap;
@@ -59,10 +58,9 @@ const StTextarea = styled.textarea`
   width: ${({ width }) => `${width}`};
   height: ${({ height }) => `${height}`};
   padding: 12px;
-  border-radius: 5px;
-  /* resize: none; */
+  border-radius: 8px;
   font-size: 14px;
   :hover {
-    border: 1px solid #457be1;
+    border: 1px solid rgb(254, 83, 31);
   }
 `;

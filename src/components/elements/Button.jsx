@@ -23,6 +23,9 @@ const StButton = styled.button`
       css`
         border: 1px solid rgb(221, 221, 221);
         background-color: white;
+        :hover{
+          border: 1px solid rgb(254, 83, 31);
+        }
         width: 100%;
         height: 50px;
       `
@@ -34,8 +37,13 @@ const StButton = styled.button`
       css`
         border: 1px solid rgb(221, 221, 221);
         background-color: white;
+        :hover {
+          background-color: rgb(254, 83, 31);
+          color: white;
+          border: none;
+        }
         width: 120px;
-        height: 50px;
+        height: 46px;
       `
     );
   }}
