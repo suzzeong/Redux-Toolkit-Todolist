@@ -37,7 +37,14 @@ const Comment = () => {
   const postComment = (e) => {
     e.preventDefault();
     dispatch(__postComment(comment));
+    
+    /* 초기화 */
+    setComment({
+      userName:'',
+      userContent:'',
+    });
   };
+  const {userName,userContent} = comment;
   const [commentShow, setCommentShow] = useState(true);
   return (
     <>
@@ -60,6 +67,7 @@ const Comment = () => {
               maxLength='5'
               placeholder='(이름 5자 이내)'
               width='200px'
+              value={userName}
             />
             <Input
               type='text'
@@ -68,6 +76,7 @@ const Comment = () => {
               maxLength='100'
               placeholder='댓글을 추가하세요.(100자 이내)'
               width='500px'
+              value={userContent}
             />
             <Button type='submit' btntype='basic-small'>
               추가하기
