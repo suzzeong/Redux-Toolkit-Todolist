@@ -13,7 +13,7 @@ const Form = () => {
   const navigate = useNavigate();
   const [username, onChangeUsernameHandler] = useInput();
   const [title, onChangeTitleHandler] = useInput();
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   const [todo, setTodo] = useState({});
   const { isLoading, error } = useSelector((state) => state.todos);
 
@@ -39,64 +39,64 @@ const Form = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (username == "") {
-      return alert("작성자 이름을 입력해주세요");
-    } else if (title === "") {
-      return alert("제목을 입력해주세요");
-    } else if (content == "") {
-      return alert("내용을 입력해주세요");
+    if (username === '') {
+      return alert('작성자 이름을 입력해주세요');
+    } else if (title === '') {
+      return alert('제목을 입력해주세요');
+    } else if (content === '') {
+      return alert('내용을 입력해주세요');
     }
     dispatch(__postTodos(todo));
-    navigate("/todolist");
+    navigate('/todolist');
   };
 
   return (
     <FormFirstdWrap onSubmit={onSubmitHandler}>
       <FormSecondWrap>
         <FormAddTodoWrap>
+          <Stlabel>작성자</Stlabel>
           <Input
-            maxLength="5"
-            fontsize="24px"
-            label="작성자"
-            pattern=".{1,5}"
-            title="1자 이상 5자 이내를입력하세요"
-            type="text"
-            name="username"
+            maxLength='5'
+            fontsize='24px'
+            pattern='.{1,5}'
+            title='1자 이상 5자 이내를입력하세요'
+            type='text'
+            name='username'
             value={username}
             onChange={onChangeUsernameHandler}
-            placeholder="작성자의 이름을 입력해주세요. (5자 이내)"
-            width="100%"
+            placeholder='작성자의 이름을 입력해주세요. (5자 이내)'
+            width='100%'
             height='200%'
           />
+          <Stlabel>제목</Stlabel>
           <Input
-            maxLength="50"
-            fontsize="24px"
-            label="제목"
-            pattern=".{3,50}"
-            title="3자 이상 50자 이내를입력하세요"
-            type="text"
-            name="title"
+            maxLength='50'
+            fontsize='24px'
+            pattern='.{3,50}'
+            title='3자 이상 50자 이내를입력하세요'
+            type='text'
+            name='title'
             value={title}
             onChange={onChangeTitleHandler}
-            placeholder="제목을 입력해주세요. (50자 이내)"
-            width="100%"
+            placeholder='제목을 입력해주세요. (50자 이내)'
+            width='100%'
             height='200%'
           />
           <Textarea
-            cols="50"
-            rows="8"
-            maxLength="200"
-            label="내용"
-            title="1자 이상 200자 이내를입력하세요"
-            name="content"
+            cols='50'
+            rows='8'
+            maxLength='200'
+            label='내용'
+            title='1자 이상 200자 이내를입력하세요'
+            name='content'
             value={content}
             onChange={onChangecontentHandler}
-            placeholder="내용을 입력해주세요. (200자 이내)"
+            placeholder='내용을 입력해주세요. (200자 이내)'
             width='100%'
             height='200px'
           />
         </FormAddTodoWrap>
-        <Button type="submit" btntype="basic">
+        <Button type='submit' btntype='basic'>
           추가하기
         </Button>
       </FormSecondWrap>
@@ -124,4 +124,10 @@ const FormAddTodoWrap = styled.div`
   margin: 0px;
   text-decoration: none;
   outline: none;
+`;
+const Stlabel = styled.label`
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
 `;

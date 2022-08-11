@@ -68,6 +68,7 @@ const Comment = () => {
               placeholder='(이름 5자 이내)'
               width='200px'
               value={userName}
+              margin='0 5px 0 0'
             />
             <Input
               type='text'
@@ -77,6 +78,7 @@ const Comment = () => {
               placeholder='댓글을 추가하세요.(100자 이내)'
               width='500px'
               value={userContent}
+              margin='0 30px 0 0'
             />
             <Button type='submit' btntype='basic-small'>
               추가하기
