@@ -10,7 +10,7 @@ const CommentView = ({ comment }) => {
 
   const [editComment, setEditComment] = React.useState(false);
 
-  let updateCommentInput = (id) => {
+  let updateCommentInput = () => {
     if (editComment) {
       setEditComment(false);
     } else {
@@ -36,7 +36,7 @@ const CommentView = ({ comment }) => {
 
   const updateCommentAction = (id) => {
     dispatch(__updateComment(updateComment));
-    updateCommentInput(id);
+    updateCommentInput();
   };
   return (
     <>
@@ -49,7 +49,7 @@ const CommentView = ({ comment }) => {
                 <CommentBottom className="comment_view">{comment.userContent}</CommentBottom>
               </div>
             ) : (
-              <Input onChange={changeEvent} name="userContent" type="text" />
+              <Input onChange={changeEvent} name="userContent" type="text" value={comment.userContent}/>
             )}
           </CommentContent>
           <CommentButton>
@@ -59,7 +59,7 @@ const CommentView = ({ comment }) => {
                   uibutton="edit"
                   btntype="ui-comment"
                   onClick={() => {
-                    updateCommentInput(comment.id);
+                    updateCommentInput();
                   }}
                 />
                 <Button
@@ -75,7 +75,7 @@ const CommentView = ({ comment }) => {
                 <Button
                   btntype="ui-comment"
                   onClick={() => {
-                    updateCommentInput(comment.id);
+                    updateCommentInput();
                   }}
                 >
                   취소
