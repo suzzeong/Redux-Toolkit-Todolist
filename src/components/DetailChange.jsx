@@ -31,7 +31,7 @@ const DetailChange = () => {
         content: updateContent,
       })
     );
-    // dispatch(__getTodos())
+    dispatch(__getTodos())
     navigate(`/detail/${param.id}`);
   };
 
