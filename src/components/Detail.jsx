@@ -98,7 +98,7 @@ const TodoId = styled.div`
 const StP = styled.div`
   font-size: 24px;
   text-decoration: underline;
-  color: teal;
+  color: orangered
 `;
 const Title = styled.div`
   font-size: 32px;
